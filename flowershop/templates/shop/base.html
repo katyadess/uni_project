@@ -18,7 +18,7 @@
         <div class="nav-container">
 
             <div class="logo">
-                <a href="#">єКв
+                <a href="{% url "shop:main" %}">єКв
                     <img src="{% static "shop/images/Vector.png" %}" alt="і" class="icon">ти
                 </a>
             </div>
@@ -27,15 +27,15 @@
                 <div class="info">
     
                     <li class="info about-us">
-                        <a href="" class="nav-link">Про нас</a>
+                        <a href="{% url "shop:about_us" %}" class="nav-link">Про нас</a>
                     </li>
                     
                     <li class="info delivery">
-                        <a href="" class="nav-link">Доставка</a>
+                        <a href="{% url "shop:delivery" %}" class="nav-link">Доставка</a>
                     </li>
                     
                     <li class="info payment">
-                        <a href="" class="nav-link">Оплата</a>
+                        <a href="{% url "shop:payment" %}" class="nav-link">Оплата</a>
                     </li>
                     
                     <li class="info number">
@@ -87,7 +87,7 @@
 
     </footer>
 
-    <script src="{% static "shop/js/back-to-top-button.js" %}"></script>
+    <script src="{% static "shop/js/back-to-top-btn.js" %}"></script>
 
     {% block scripts %}
     {% endblock scripts %} 
