@@ -1,0 +1,36 @@
+{% extends "shop/base.html" %}
+{% block css_links %}
+{% load static %}
+<link rel="stylesheet" href="{% static "shop/css/sposob_oplaty.css" %}">
+{% endblock css_links %}
+
+{% block content %}
+    <main class="payment-section">
+        <div class="payment-container">
+            <h1 class="order-title">Замовлення №35467</h1>
+            <form class="payment-form">
+                <div class="payment-option">
+                    <input type="radio" id="card" name="payment_method" value="card" checked>
+                    <label for="card">Оплата карткою (Visa/MasterCard)</label>
+                </div>
+                <div class="payment-option">
+                    <input type="radio" id="cash" name="payment_method" value="cash">
+                    <label for="cash">Наложений платіж (готівкою або терміналом)</label>
+                </div>
+                <div class="payment-option">
+                    <input type="radio" id="applepay" name="payment_method" value="applepay">
+                    <label for="applepay">Apple pay</label>
+                </div>
+                <div class="payment-option">
+                    <input type="radio" id="googlepay" name="payment_method" value="googlepay">
+                    <label for="googlepay">Google pay</label>
+                </div>
+            </form>
+        </div>
+        <a id="continueBtn" href="oplata.html" class="continue-btn">Продовжити</a>
+    </main>
+{% endblock content %}
+        
+{% block scripts %}
+    <script src="{% static "shop/js/sposob_oplaty.js" %}"></script>
+{% endblock scripts %}

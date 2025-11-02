@@ -1,0 +1,183 @@
+.inform{
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    margin-bottom: 50px;
+    padding: 0 20px; 
+}
+
+.info-name{
+    font-family: var(--ff);
+    font-size: 30px;
+    margin-bottom: 35px;
+    color: #fff;
+    text-shadow:
+        -1px -1px 0 #7EB877,  
+         1px -1px 0 #7EB877,
+        -1px  1px 0 #7EB877,
+         1px  1px 0 #7EB877;
+}
+
+.inform {
+    flex-direction: column;
+    margin: 0 auto 50px auto; 
+    max-width: 900px; 
+    width: 100%;
+    margin-top: 50px;
+}
+
+.profile-form {
+    width: 100%; 
+    margin-top: 30px; 
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 35px 25px;
+    width: 100%;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; 
+}
+
+.form-group label {
+    font-family: var(--ff);
+    color: #7EB877; 
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.form-grid input[type="text"],
+.form-grid input[type="email"],
+.form-grid input[type="tel"],
+.form-grid input[type="password"] {
+    background: transparent; 
+    border: none; 
+    border-bottom: 3px solid #7EB877; 
+    font-family: var(--ff);
+    font-size: 24px;
+    font-weight: 500;
+    color: #444; 
+    padding: 8px 0;
+    width: 100%;
+}
+
+.form-actions {
+    grid-column: 1 / 2; 
+    margin-top: 20px; 
+}
+
+.update-btn {
+    background: transparent;
+    border: 3px solid #7EB877;
+    border-radius: 10px; 
+    padding: 12px 30px;
+    font-family: var(--ff);
+    color: #7EB877;
+    font-size: 22px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease; 
+}
+
+.update-btn:hover {
+    background: #7EB877;
+    color: #F8C1CD; 
+}
+
+.password-label-group {
+    display: flex;
+    justify-content: space-between; 
+    align-items: baseline;
+    width: 100%;
+}
+.password-label-group a {
+    font-family: var(--ff);
+    color: #9a9b99;
+    font-weight: 600;
+    font-size: 18px; 
+    transition: all 0.2s ease;
+}
+
+.password-label-group a:hover {
+    color: #fff;
+    text-shadow:
+        -1px -1px 0 #9a9b99,  
+         1px -1px 0 #9a9b99,
+        -1px  1px 0 #9a9b99,
+         1px  1px 0 #9a9b99;
+}
+
+.password-input-group {
+    position: relative; 
+    display: flex;
+    align-items: center;
+}
+.password-input-group input {
+    width: 100%;
+    padding-right: 45px;
+}
+
+#togglePassword {
+    position: absolute;
+    right: 10px; 
+    cursor: pointer;
+    color: #7EB877;
+    font-size: 24px;
+}
+
+.delete-action {
+    align-self: end; 
+}
+.logout-action {
+    align-self: end; 
+    justify-self: end; 
+}
+
+.logout-link {
+    font-family: var(--ff);
+    padding: 12px 0px;
+    color: #7EB877;
+    font-weight: 600;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.logout-link:hover{
+    color: #fff;
+    text-shadow:
+        -1px -1px 0 #7EB877,  
+         1px -1px 0 #7EB877,
+        -1px  1px 0 #7EB877,
+         1px  1px 0 #7EB877;
+}
+
+.delete-link{
+    background-color: transparent;
+    border-radius: 50px;
+    border: 3px solid #c03c3f;
+    padding: 12px 30px;
+    max-width: 275px;
+    font-family: var(--ff);
+    color: #c03c3f;
+    font-weight: 600;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.delete-link:hover{
+    background-color: #c03c3f;
+    color: #fff;
+}

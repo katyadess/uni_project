@@ -1,0 +1,97 @@
+.payment-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 20px;
+    min-height: calc(100vh - 160px); 
+    flex-direction: column;
+    gap: 50px;
+}
+
+.payment-container {
+    width: 100%;
+    max-width: 550px;
+    text-align: center;
+}
+
+.order-title {
+    font-size: 30px;
+    font-weight: medium;
+    color: #000;
+    margin-bottom: 79px;
+}
+
+.payment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.payment-option {
+    position: relative;
+}
+
+.payment-option input[type="radio"] {
+    display: none; 
+}
+
+.payment-option label {
+    display: block;
+    background-color: #F8C1CD;
+    background-color: rgba(248, 193, 205, 0.75);
+    padding: 18px 20px 18px 60px; 
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: left;
+    color: #4CAF50;
+    font-size: 19px;
+    font-weight: bold;
+    transition: transform 0.2s ease;
+}
+
+.payment-option label:hover {
+    transform: scale(1.02);
+}
+
+.payment-option label::before {
+    content: '';
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 22px;
+    height: 22px;
+    border: 2px solid #4CAF50;
+    border-radius: 50%;
+    background-color: #F8C1CD;
+    background-color: rgba(248, 193, 205, 0.75);
+}
+
+.payment-option input[type="radio"]:checked + label::after {
+    content: '';
+    position: absolute;
+    left: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    background-color: #4CAF50;
+    border-radius: 50%;
+}
+
+.continue-btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: #F58EB1;
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    text-decoration: none; 
+    border-radius: 10px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.continue-btn:hover {
+    background-color: #e0709c; 
+}

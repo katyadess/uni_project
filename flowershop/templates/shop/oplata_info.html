@@ -1,0 +1,35 @@
+{% extends "shop/base.html" %}
+{% block css_links %}
+{% load static %}
+<link rel="stylesheet" href="{% static "shop/css/oplata_info.css" %}">
+{% endblock css_links %}
+
+{% block content %}
+
+    <!--Основная информация-->
+    <div>
+        <a class = opl-name>Оплата
+            <img src="{% static "shop/images/Vector.png" %}" alt="і" class="icon">
+        </a>
+
+        <p class="opl-info">Ми подбали, щоб замовляти квіти в єКвіти було зручно та безпечно. Доступні способи оплати:
+        </p>
+            <ul class="opl-list">
+                <li class = "opl-item">Онлайн-оплата банківською картою (Visa, MasterCard) - швидко та зручно.</li>
+                <li class = "opl-item">Оплата через сервіси електронних платежів (Apple Pay, Google Pay) - для користувачів мобільних пристроїв.</li>
+                <li class = "opl-item">Оплата при отриманні (готівкою або картою) - для тих, хто віддає перевагу традиційному способу.</li>
+            </ul>
+            
+        <p class="opl-info">Всі онлайн-платежі проходять через захищені платіжні системи, тож ви можете бути впевнені у безпеці своїх даних.
+            Якщо у вас виникли питання щодо оплати, будь ласка, звертайтеся до нашої служби підтримки клієнтів.
+            Ми завжди раді допомогти вам!</p>
+    </div>
+
+    <div class = 'container'>
+
+    </div>
+
+{% endblock content %} 
+
+{% block scripts %}
+{% endblock scripts %} 

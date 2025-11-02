@@ -1,0 +1,148 @@
+{% extends "shop/base.html" %}
+{% block css_links %}
+{% load static %}
+<link rel="stylesheet" href="{% static "shop/css/main.css" %}">
+{% endblock css_links %}
+
+{% block content %}
+    <main class="content">
+        <form method="get" action="" class="search-bar">
+            <input type="text" name="q" placeholder="Пошук..." value="{{ request.GET.q }}">
+            <button type="submit">
+                <img src="{% static 'shop/images/str.png' %}" alt="search">
+            </button>
+        </form>
+        <div class="filt">
+            <h3>Фільтри</h3>
+        </div>
+
+
+        <form method="get" action="" class="filters">
+
+            <select name="flower_type">
+                <option value="">Квіти</option>
+                {% for flower in flower_types %}
+                    <option value="{{ flower }}" {% if request.GET.flower_type == flower %}selected{% endif %}>
+                        {{ flower }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <select name="price_order">
+                <option value="">Ціна</option>
+                <option value="asc" {% if request.GET.price_order == 'asc' %}selected{% endif %}>Від дешевших до дорожчих</option>
+                <option value="desc" {% if request.GET.price_order == 'desc' %}selected{% endif %}>Від дорожчих до дешевших</option>
+            </select>
+
+            <button type="submit" style="display:none;"></button>
+            
+        </form>
+
+
+        <div class="products">
+            <a href="" class="card-link">
+                <div class="card">
+                    <img src="" alt="">
+                    <div class="price">1500 грн</div>
+                </div>
+            </a>
+            <div class="card">
+                <img src="flowers.png" alt="Букет">
+                <div class="price">1500</div>
+            </div>
+            <div class="card">
+                <img src="flowers.png" alt="Букет">
+                <div class="price">1500</div>
+            </div>
+            <div class="card">
+                <img src="flowers.png" alt="Букет">
+                <div class="price">1500</div>
+            </div>
+            <div class="card">
+                <img src="flowers.png" alt="Букет">
+                <div class="price">1600</div>
+            </div>
+            <div class="card">
+                <img src="flowers.png" alt="Букет">
+                <div class="price">1500</div>
+            </div>
+            <div class="card">
+                <img src="flowers.png" alt="Букет">
+                <div class="price">1500</div>
+            </div>
+            <div class="card">
+                <img src="flowers.png" alt="Букет">
+                <div class="price">1500</div>
+            </div>
+
+
+            <div class="card">
+                <img src="flowers.png" alt="Букет">
+                <div class="price">1500</div>
+            </div>
+            <div class="card">
+                <img src="flowers.png" alt="Букет">
+                <div class="price">1500</div>
+            </div>
+            <div class="card">
+                <img src="flowers.png" alt="Букет">
+                <div class="price">1500</div>
+            </div>
+            <div class="card">
+                <img src="flowers.png" alt="Букет">
+                <div class="price">1500</div>
+            </div>
+
+
+            <div class="card">
+                <img src="flowers.png" alt="Букет">
+                <div class="price">1500</div>
+            </div>
+            <div class="card">
+                <img src="flowers.png" alt="Букет">
+                <div class="price">1500</div>
+            </div>
+            <div class="card">
+                <img src="flowers.png" alt="Букет">
+                <div class="price">1500</div>
+            </div>
+            <div class="card">
+                <img src="flowers.png" alt="Букет">
+                <div class="price">1500</div>
+            </div>
+
+
+            <div class="card">
+                <img src="flowers.png" alt="Букет">
+                <div class="price">1500</div>
+            </div>
+            <div class="card">
+                <img src="flowers.png" alt="Букет">
+                <div class="price">1500</div>
+            </div>
+            <div class="card">
+                <img src="flowers.png" alt="Букет">
+                <div class="price">1500</div>
+            </div>
+            <div class="card">
+                <img src="flowers.png" alt="Букет">
+                <div class="price">1500</div>
+            </div>
+        </div>
+    </main>
+
+    {% comment %} pagination {% endcomment %}
+    <a href="main2_.html">
+        <button class="btn">ДИВИТИСЯ ЩЕ</button>
+    </a>
+
+    <div class="consult">
+        <p>Потрібна Консультація?</p>
+        <p>Дзвони +38 (095) 432 1232</p>
+    </div>
+
+{% endblock content %}
+     
+{% block scripts %}
+    <script src="{% static "shop/js/main.js" %}"></script>
+{% endblock scripts %} 

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link href='https://fonts.googleapis.com/css?family=Montserrat Alternates' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static "shop/css/base.css" %}">
+    {% block css_links %}
+    {% endblock css_links %}
+    <title>Document</title>
+</head>
+<body>
+    <header class="header">
+
+        <div class="nav-container">
+
+            <div class="logo">
+                <a href="#">єКв
+                    <img src="{% static "shop/images/Vector.png" %}" alt="і" class="icon">ти
+                </a>
+            </div>
+    
+            <div class="nav-items">
+                <div class="info">
+    
+                    <li class="info about-us">
+                        <a href="" class="nav-link">Про нас</a>
+                    </li>
+                    
+                    <li class="info delivery">
+                        <a href="" class="nav-link">Доставка</a>
+                    </li>
+                    
+                    <li class="info payment">
+                        <a href="" class="nav-link">Оплата</a>
+                    </li>
+                    
+                    <li class="info number">
+                        <a href="" class="nav-link">+38 (095) 432 1232</a>
+                    </li>
+    
+                </div>
+                <div class="icons">
+    
+                    <li class="icons cart">
+                        <a href="" class="nav-link"><i class="bi bi-bag"></i></a>
+                    </li>
+    
+                    <li class="icons account">
+                        <a href="" class="nav-link"> <i class="bi bi-person-circle"></i></a>
+                    </li>
+                    
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    {% block content %}
+    {% endblock content %} 
+
+    <button id="back-to-top" class="back-to-top"><i class="bi bi-chevron-up"></i></button>
+    
+    <footer class="footer">
+        
+        <div class="footer-sec main-page">
+            <li class="footer-list"><a href="{% url "shop:main" %}">Головна</a></li>
+        </div>
+
+        <div class="footer-sec socials">
+            <p class="footer-list">Наші соц. мережі</p>
+            <li class="footer-list"><a href="https://www.instagram.com/ekvity_ua?igsh=MWE0ZTFodTE5NWIzag==">Instagram</a></li>
+            <li class="footer-list"><a href="#">Facebook</a></li>
+            <li class="footer-list"><a href="#">LinkedIn</a></li>
+            <li class="footer-list"><a href="#">X</a></li>
+        </div>
+
+        <div class="footer-sec contacts">
+            <p class="footer-list">Контакти</p>
+            <li class="footer-list"><a href="#">+38 (095) 432 1232</a></li>
+        </div>
+        
+        <section class="poloska"></section>
+
+    </footer>
+
+    <script src="{% static "shop/js/back-to-top-button.js" %}"></script>
+
+    {% block scripts %}
+    {% endblock scripts %} 
+
+</body>
+</html>

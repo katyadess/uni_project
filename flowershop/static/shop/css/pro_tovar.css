@@ -1,0 +1,284 @@
+main.product-page-container {
+    max-width: 1440px;
+    margin: 40px auto;
+    padding: 0 45px;
+    font-family: var(--ff);
+    color: #333;
+}
+
+.product-layout {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 50px;
+}
+
+.product-image-container {
+    flex: 1;
+    background-color: #E9F2E2; 
+    border-radius: 15px;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-image-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.product-info-container {
+    flex: 1;
+    padding: 10px 0;
+}
+
+.product-title {
+    font-size: 42px;
+    font-weight: 600;
+    color: #333;
+}
+
+.product-price {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.product-price .old-price {
+    font-size: 24px;
+    color: #888;
+    text-decoration: line-through;
+}
+
+.product-price .new-price {
+    font-size: 36px;
+    font-weight: 600;
+    color: #333;
+}
+
+.product-price .discount-badge {
+    background-color: #F58EB1;
+    color: black;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.order-button {
+    background-color: #E9F2E2; 
+    padding: 18px 40px;
+    font-size: 20px;
+    font-weight: 600;
+    font-family: var(--ff);
+    color: #333;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.order-button:hover {
+    background-color: #d8e6cb;
+}
+
+.product-composition,
+.product-guarantee {
+    font-size: 18px;
+    line-height: 1.5;
+    margin-top: 25px;
+    color: #333;
+}
+
+.tabs-container {
+    margin-top: 30px;
+}
+
+.tabs-nav {
+    display: flex;
+    gap: 30px;
+    border-bottom: 2px solid #E9F2E2;
+}
+
+.tab-link {
+    background: none;
+    font-family: var(--ff);
+    font-size: 22px;
+    font-weight: 600;
+    padding-bottom: 10px;
+    cursor: pointer;
+    color: #888;
+    position: relative;
+    bottom: -2px; 
+}
+
+.tab-link.active {
+    color: #333;
+    border-bottom: 3px solid #F58EB1; 
+}
+
+.tabs-content {
+    margin-top: 25px;
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+.tab-pane {
+    display: none; 
+}
+
+.tab-pane.active {
+    display: block; 
+}
+
+.tab-pane ul {
+    list-style-position: inside;
+}
+.tab-pane ul li {
+    margin-bottom: 10px;
+}
+
+.product-reviews {
+    margin: 60px 0;
+}
+
+.reviews-title {
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.review-item {
+    background-color: rgba(255, 255, 255, 0.7); 
+    border-radius: 15px;
+    padding: 20px 25px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.review-author {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 18px;
+}
+
+.review-date {
+    font-size: 14px;
+    color: #777;
+}
+
+.review-body {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.see-more-reviews {
+    display: block;
+    margin: 30px auto 0;
+    background-color: #F8C1CD; /* Світло-рожевий */
+    color: #333;
+    font-weight: 600;
+    font-family: var(--ff);
+    padding: 15px 40px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+.see-more-reviews:hover {
+    background-color: #f3b0c1;
+}
+
+/* --- "Залишити відгук" --- */
+.add-review-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 60px;
+    flex-wrap: wrap; /* Для мобільних */
+}
+
+.add-review-title {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.review-form {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.review-form textarea {
+    background-color: #F8C1CD;
+    border-radius: 10px;
+    padding: 15px;
+    width: 400px;
+    height: 60px;
+    font-family: var(--ff);
+    font-size: 16px;
+    resize: none;
+    color: #333;
+}
+
+.review-form textarea::placeholder {
+    color: #333;
+    opacity: 0.7;
+    font-weight: 500;
+}
+
+.submit-review-button {
+    background-color: #E9F2E2;
+    padding: 18px 30px;
+    font-weight: 600;
+    font-family: var(--ff);
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    height: 60px; /* Вирівнюємо по висоті з textarea */
+    transition: background-color 0.3s ease;
+}
+.submit-review-button:hover {
+    background-color: #d8e6cb;
+}
+
+.back {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+#back-arrow-button {
+    font-size: 22px; 
+    font-family: var(--ff);
+    font-weight: 600;
+    color: #E9F2E2;
+    cursor: pointer;
+    text-shadow:
+        -1px -1px 0 #F8C1CD,  
+         1px -1px 0 #F8C1CD,
+        -1px  1px 0 #F8C1CD,
+         1px  1px 0 #F8C1CD;
+
+    display: inline-flex; 
+    align-items: center;
+    gap: 8px; 
+    margin-bottom: 20px;
+    margin-top: 10px; 
+}
+
+#back-arrow-button .bi-arrow-left {
+    font-size: 26px; 
+    vertical-align: middle;
+}

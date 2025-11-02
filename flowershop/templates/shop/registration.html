@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="uk">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>єКвіти</title>
+    {% load static %}
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static "shop/css/registration.css" %}">
+</head>
+
+<body>
+    <div class="container">
+        <div class="left">
+            <p class="logo">
+                єКв
+                <img src="{% static "shop/images/pinkVector.png" %}" alt="і" class="icon">
+                ти
+            </p>
+
+
+            <h1>Сервіс для швидкого пошуку якісних квітів</h1>
+            <h3>Наші соц. мережі</h3>
+            <div class="socials">
+                <a href="https://www.instagram.com/ekvity_ua?igsh=MWE0ZTFodTE5NWIzag=="><img src="{% static "shop/images/pink1.png" %}" alt="Instagram"></a>
+                <a href="#"><img src="{% static "shop/images/pink2.png" %}" alt="LinkedIn"></a>
+                <a href="#"><img src="{% static "shop/images/pink3.png" %}" alt="Facebook"></a>
+                <a href="#"><img src="{% static "shop/images/pink4.png" %}" alt="X"></a>
+            </div>
+        </div>
+
+        <div class="right">
+            <h2>Ласкаво просимо!</h2>
+            <div class="form-group">
+                <h4>Ім'я</h4>
+                <input type="text">
+            </div>
+            <div class="form-group">
+                <h4>Пошта</h4>
+                <input type="password">
+            </div>
+            <div class=" form-group">
+                <h4>Місто</h4>
+                <input type="city">
+            </div>
+            <button class=" login-btn">Зареєструватися</button>
+            <a href="{% url "shop:home" %}"><button class="register-btn">Є акаунт? Увійти</button></a>
+
+            <div class="divider">——— Continue with ———</div>
+
+            <div class="social-login">
+                <button class="google-btn"><img src="{% static "shop/images/google.png" %}" alt="Google"> Continue with Google</button>
+                <button class="apple-btn"><img src="{% static "shop/images/apple.png" %}" alt="Apple">
+                    Continue with Apple</button>
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+    <div class="below">
+        <h2>Чому нам довіряють?</h2>
+        <div class="text-image">
+            <img src="{% static "shop/images/Frame2.png" %}" alt="і" class="image">
+            <p>
+                Ми дбаємо про кожну деталь: від<br>
+                свіжості квітів до вчасної доставки.<br>
+                Наші клієнти отримують саме ті<br>
+                букети, які замовляють, без<br>
+                неприємних сюрпризів. Прозорі ціни,<br>
+                зручна оплата та щирий сервіс<br>
+                роблять нас надійним вибором для<br>
+                найважливіших моментів.
+            </p>
+        </div>
+        <div class="client">
+            <h3>Ставай нашим<br> постійним клієнтом і<br> отримуй знижку -10%</h3>
+        </div>
+        <div class="reviews">
+            <h3>відгуки</h4>
+                <p>Прочитай, Що Є Сказати Іншим</p>
+        </div>
+        <div class="cards">
+            <div class="card">
+                <img src="{% static "shop/images/MaskGroup2.png" %}" alt="photo">
+                <h4>OLIVIA COLE</h4>
+                <p>Замовляла букет до дня народження — усе просто неймовірно! Квіти свіжі, ароматні, оформлення дуже
+                    ніжне. Доставили точно вчасно.</p>
+            </div>
+
+            <div class="card">
+                <img src="{% static "shop/images/MaskGroup1.png" %}" alt="photo">
+                <h4>JESSICA PAGE</h4>
+                <p>Дуже люблю ваші букети — завжди стильні, сучасні й зі смаком. Навіть через кілька днів виглядають,
+                    ніби щойно зібрані!</p>
+            </div>
+
+            <div class="card">
+                <img src="{% static "shop/images/MaskGroup.png" %}" alt="photo">
+                <h4>EVAN WHITE</h4>
+                <p>Приємно здивований сервісом! Консультант допоміг обрати композицію, яка перевершила очікування. Тепер
+                    тільки тут беру квіти.</p>
+            </div>
+        </div>
+        <div class="gradient-box-wrapper">
+            <div class="fog fog1"></div>
+            <div class="fog fog2"></div>
+            <div class="gradient-box">
+                <p class="gradient-p">ARE YOU READY?</p>
+                <span class="gradient-text">Стань Причиною Гарного <br> Настрою Близьких Людей</span>
+                <a href="{% url "shop:main" %}">
+                    <button class="gradient-btn">РОЗПОЧАТИ</button>
+                </a>
+
+            </div>
+        </div>
+
+        <footer class="footer">
+
+            <div class="footer-sec main-page">
+                <li class="footer-list"><a href="{% url "shop:main" %}">Головна</a></li>
+            </div>
+
+            <div class="footer-sec socials">
+                <p class="footer-list">Наші соц. мережі</p>
+                <li class="footer-list"><a href="https://www.instagram.com/ekvity_ua?igsh=MWE0ZTFodTE5NWIzag==">Instagram</a></li>
+                <li class="footer-list"><a href="#">Facebook</a></li>
+                <li class="footer-list"><a href="#">LinkedIn</a></li>
+                <li class="footer-list"><a href="#">X</a></li>
+            </div>
+
+            <div class="footer-sec contacts">
+                <p class="footer-list">Контакти</p>
+                <li class="footer-list"><a href="#">+38 (095) 432 1232</a></li>
+            </div>
+
+        </footer>
+
+
+    </div>
+    <div class="footer-line"></div>
+
+
+</body>
+
+</html>

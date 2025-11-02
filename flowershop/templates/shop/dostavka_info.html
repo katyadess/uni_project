@@ -1,0 +1,35 @@
+{% extends "shop/base.html" %}
+{% block css_links %}
+{% load static %}
+<link rel="stylesheet" href="{% static "shop/css/dostavka_info.css" %}">
+{% endblock css_links %}
+
+{% block content %}
+
+
+<!--Основная информация-->
+<div>
+    <a class = opl-name>Доставка
+        <img src="{% static "shop/images/Vector.png" %}" alt="і" class="icon">
+    </a>
+
+    <p class="opl-info">Ми дбаємо про те, щоб ваші квіти прибули вчасно та у бездоганному стані. Ми пропонуємо різні способи доставки, оберіть найзручніший для вас:
+    </p>
+        <ul class="opl-list">
+            <li class = "opl-item">Стандартна доставка — здійснюється протягом дня у погоджений з вами проміжок часу. Ідеальний варіант для планових замовлень.</li>
+            <li class = "opl-item">Доставка в точний час — якщо важлива кожна хвилина, ми доставимо букет точно у зазначений час без жодних затримок.</li>
+            <li class = "opl-item">Експрес-доставка — для термінових випадків: ваш букет буде доставлено вже за 30 хвилин після оформлення замовлення.</li>
+            <li class = "opl-item">Самовивіз — заберіть квіти самостійно з нашого магазину у зручний для вас час, щоб особисто переконатися в їхній свіжості.</li>
+        </ul>
+        
+    <p class="opl-info">Ми гарантуємо швидкість, якість і турботу в кожній доставці.</p>
+</div>
+
+<div class = 'container'>
+
+</div>
+
+{% endblock content %} 
+
+{% block scripts %}
+{% endblock scripts %} 

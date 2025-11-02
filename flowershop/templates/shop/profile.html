@@ -1,0 +1,63 @@
+{% extends "shop/base.html" %}
+{% block css_links %}
+{% load static %}
+<link rel="stylesheet" href="{% static "shop/css/profile.css" %}">
+{% endblock css_links %}
+
+{% block content %}
+    <div class="inform">
+        <h1 class="info-name">Інформація про акаунт</h1>
+        <form class="profile-form">
+            <div class="form-grid">
+            
+                <div class="form-group">
+                    <label for="fname">Ім'я</label>
+                    <input type="text" id="fname" value="Єлизавета">
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Номер телефону</label>
+                    <input type="tel" id="phone" value="(098) 380 9401">
+                </div>
+
+                <div class="form-group">
+                    <label for="lname">Прізвище</label>
+                    <input type="text" id="lname" value="Черкаська">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">e-mail</label>
+                    <input type="email" id="email" value="elizaveta@gmail.com">
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="update-btn">Оновити дані</button>
+                </div>
+
+                <div class="form-group">
+                    <div class="password-label-group">
+                        <label for="password">Пароль</label>
+                        <a href="#">змінити</a>
+                    </div>
+                    <div class="password-input-group">
+                        <input type="password" id="password" value="student1">
+                        <i class="bi bi-eye-slash" id="togglePassword"></i>
+                    </div>
+                </div>
+
+                <div class="form-group delete-action">
+                    <a href="#" class="delete-link">Видалити акаунт</a>
+                </div>
+
+                <div class="form-group logout-action">
+                    <a href="#" class="logout-link">Вийти з акаунту <i class="bi bi-box-arrow-right"></i></a>
+                </div>
+
+            </div>
+        </form>
+    </div>
+{% endblock content %}
+
+{% block scripts %}
+    <script src="{% static "shop/js/profile.js" %}"></script>
+{% endblock scripts %}
