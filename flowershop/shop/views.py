@@ -1,13 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from .forms import *
 from .models import *
 
 
 def home(request):
     form = LoginForm(request.POST or None)
-    
+     
     if request.method == "POST" and form.is_valid():
         email = form.cleaned_data["email"]
         password = form.cleaned_data["password"]
@@ -46,7 +46,10 @@ def oplata(request):
 def profile(request):
     return render(request, 'shop/profile.html')
 
+def shop_logout(request):
+    logout(request)
+    return redirect('shop:home')
+
 def sposob_oplaty(request):
     return render(request, 'shop/sposob_oplaty.html')
-
 
