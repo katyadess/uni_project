@@ -5,4 +5,5 @@ from .models import *
 admin.site.register(FlowerType)
 admin.site.register(Bouquet)
 admin.site.register(BouquetReview)
+admin.site.register(UserData)
 

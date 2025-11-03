@@ -1,24 +1,50 @@
-# users/admin.py
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin
-from .models import CustomUser
+from .models import *
+from shop.models import UserData
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 
-class CustomUserAdmin(UserAdmin):
-    model = CustomUser
-    list_display = ('email', 'is_staff', 'is_superuser', 'is_active')
-    list_filter = ('is_staff', 'is_superuser', 'is_active')
-    search_fields = ('email',)
-    ordering = ('email',)
+
+class UserDataInline(admin.StackedInline):
+    model = UserData
+    can_delete = False
+    verbose_name_plural = 'app_users'
+    
+class UserAdmin(BaseUserAdmin):
+    inlines = (UserDataInline,)
+
+   
+    list_display = ('email', 'first_name', 'last_name', 'is_staff', 'is_active')
+    list_filter = ('is_staff', 'is_superuser', 'is_active', 'groups')
+
+   
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        ('Permissions', {'fields': ('is_staff', 'is_superuser', 'is_active', 'groups', 'user_permissions')}),
+        ('Персональні дані', {'fields': ('first_name', 'last_name')}),
+        ('Права доступу', {
+            'fields': (
+                'is_active', 'is_staff', 'is_superuser',
+                'groups', 'user_permissions'
+            )
+        }),
+        ('Важливі дати', {'fields': ('last_login', 'date_joined')}),
     )
+
+  
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email', 'password1', 'password2', 'is_staff', 'is_superuser', 'is_active')}
-        ),
+            'fields': (
+                'email', 'password1', 'password2',
+                'first_name', 'last_name',
+                'is_staff', 'is_active'
+            ),
+        }),
     )
 
-admin.site.register(CustomUser)
+    search_fields = ('email', 'first_name', 'last_name')
+    ordering = ('email',)
+    filter_horizontal = ('groups', 'user_permissions')
+
+
+admin.site.register(CustomUser, UserAdmin)
