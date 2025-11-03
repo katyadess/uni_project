@@ -4,6 +4,6 @@ document.querySelectorAll('.filters select').forEach(select => {
     });
 });
 
-// if (window.location.search) {
-//         window.history.replaceState({}, document.title, window.location.pathname);
-// }
+if (window.location.search) {
+        window.history.replaceState({}, document.title, window.location.pathname);
+}
