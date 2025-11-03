@@ -5,6 +5,7 @@ from .forms import *
 from .models import *
 from django.core.paginator import Paginator
 from django.db.models import Q
+from django.db.models.functions import Lower
 
 def home(request):
     form = LoginForm(request.POST or None)
@@ -91,8 +92,12 @@ def main(request):
     bouquets = Bouquet.objects.all()
     
     if query:
-        bouquets = bouquets.filter(
-            Q(name__icontains=query) | Q(composition__icontains=query)
+        bouquets = bouquets.annotate(
+            lower_name=Lower('name'),
+            lower_composition=Lower('composition')
+        ).filter(
+            Q(lower_name__contains=query.lower()) |
+            Q(lower_composition__contains=query.lower())
         )
     if flower_type:
         bouquets = bouquets.filter(flowers__name=flower_type)
