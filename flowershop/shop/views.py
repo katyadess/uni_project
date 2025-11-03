@@ -9,9 +9,9 @@ def home(request):
     form = LoginForm(request.POST or None)
      
     if request.method == "POST" and form.is_valid():
-        email = form.cleaned_data["email"]
+        email = form.cleaned_data["username"]
         password = form.cleaned_data["password"]
-        user = authenticate(request, email=email, password=password)
+        user = authenticate(request, username=email, password=password)
         
         if user is not None:
             login(request, user)
@@ -22,7 +22,15 @@ def home(request):
     return render(request, 'shop/home.html', {'form': form})
 
 def registration(request):
-    return render(request, 'shop/registration.html')
+    form = RegistrationForm(request.POST or None)
+    if request.method == "POST" and form.is_valid():
+        user = form.save(commit=False)
+        user.set_password(form.cleaned_data['password'])
+        user.save()
+        login(request, user)
+        return redirect('shop:profile')
+    
+    return render(request, 'shop/registration.html', {'form': form})
 
 def main(request):
     return render(request, 'shop/main.html')

@@ -32,19 +32,27 @@
 
         <div class="right">
             <h2>Ласкаво просимо!</h2>
-            <div class="form-group">
-                <h4>Ім'я</h4>
-                <input type="text">
-            </div>
-            <div class="form-group">
-                <h4>Пошта</h4>
-                <input type="email">
-            </div>
-            <div class="form-group">
-                <h4>Пароль</h4>
-                <input type="password">
-            </div>
-            <button class=" login-btn">Зареєструватися</button>
+            <form action="{% url "shop:registration" %}" method='POST'>
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="first_name">Ім'я</label>
+                    {{form.first_name}}
+                </div>
+                <div class="form-group">
+                    <label for="email">Пошта</label>
+                    {{form.email}}
+                </div>
+                <div class="form-group">
+                    <label for="password">Пароль</label>
+                    {{form.password}}
+                </div>
+
+                {% if form.errors %}
+                    <p class="error-message">Невірна пошта або пароль.</p>
+                {% endif %}
+
+                <button class="login-btn" type='submit'>Зареєструватися</button>
+            </form>
             <a href="{% url "shop:home" %}"><button class="register-btn">Є акаунт? Увійти</button></a>
 
             <div class="divider">——— Continue with ———</div>
@@ -54,7 +62,7 @@
                 <button class="apple-btn"><img src="{% static "shop/images/apple.png" %}" alt="Apple">
                     Continue with Apple</button>
             </div>
-        </div>
+        </div> 
 
     </div>
     </div>

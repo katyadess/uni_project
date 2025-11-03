@@ -159,6 +159,17 @@ body {
 
 }
 
+.right form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.right form .form-group {
+    display: flex;
+    flex-direction: column;
+}
+
 
 .right h2 {
     font-size: 40px;
@@ -175,7 +186,7 @@ body {
 
 }
 
-.right h4 {
+.right label {
     font-size: 23px;
     font-weight: 700;
     font-style: bold;
@@ -207,7 +218,7 @@ body {
     margin-left: 50px;
     margin-bottom: 2px;
 }
-
+ 
 button.login-btn {
     font-size: 23px;
     font-weight: 700;
