@@ -16,6 +16,7 @@ body {
     background: radial-gradient(circle, #CAD4B5 10%, #CAD4B5 80%, #ffd6df 100%);
     height: 100vh;
     width: 100%;
+    font-family: var(--ff);
     overflow-x: hidden;
     background-size: cover;
 }
@@ -156,7 +157,7 @@ body {
     cursor: pointer;
 }
 
-.socials, .contacts {
+.main-page, .socials, .contacts {
     display: flex;
     flex-direction: column;
     align-items: center;

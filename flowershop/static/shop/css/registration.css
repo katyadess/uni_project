@@ -197,7 +197,7 @@ body {
 
 }
 
-input[type="text"] {
+.form-group input{
     width: 60%;
     padding: 12px;
     border-radius: 20px;
@@ -206,27 +206,6 @@ input[type="text"] {
     outline: none;
     margin-left: 50px;
     margin-bottom: 2px;
-}
-
-input[type="password"] {
-    width: 60%;
-    padding: 12px;
-    border-radius: 20px;
-    border: none;
-    background: #B7DCAB99;
-    outline: none;
-    margin-left: 50px;
-    margin-bottom: 2px;
-}
-
-input[type="city"] {
-    width: 60%;
-    padding: 12px;
-    border-radius: 20px;
-    border: none;
-    background: #B7DCAB99;
-    outline: none;
-    margin-left: 50px;
 }
 
 button.login-btn {

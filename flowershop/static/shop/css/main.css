@@ -1,3 +1,51 @@
+:root {
+    --ff: 'Montserrat Alternates', sans-serif;
+
+
+    --clr-bg: #fcccd6;
+    --clr-accent: #E3ABB3;
+    --clr-accent-hover: #e0949e;
+    --clr-green: #B7DCAB;
+    --clr-green-dark: #7EB877;
+    --clr-text: #7a8a67;
+    --clr-white: #ffffff;
+}
+
+body {
+    margin: 0;
+    font-family: 'Montserrat Alternates', sans-serif;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #fcccd6;
+    color: #7a8a67;
+    overflow-x: hidden;
+}
+
+.logo a {
+    color: #B7DCAB !important;
+    text-shadow:
+        -1px -1px 0 #7EB877,  
+        1px -1px 0 #7EB877,
+        -1px  1px 0 #7EB877,
+        1px  1px 0 #7EB877,
+        2px 4px 5px rgba(0, 0, 0, .3) !important;
+}
+
+.nav-link {
+    color: var(--clr-green) !important;
+    text-shadow:
+        -1px -1px 0 var(--clr-green-dark),  
+        1px -1px 0 var(--clr-green-dark),
+        -1px  1px 0 var(--clr-green-dark),
+        1px  1px 0 var(--clr-green-dark),
+        2px 4px 5px rgba(0, 0, 0, .3) !important;
+   
+}
+
+
+
 .search-bar {
     display: flex;
     justify-content: center;

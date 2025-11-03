@@ -4,9 +4,10 @@ const continueBtn = document.getElementById('continueBtn');
 paymentOptions.forEach(option => {
     option.addEventListener('change', () => {
         if (option.value === 'cash') {
-            continueBtn.href = 'zamovlenya_usp.html';
+            // continueBtn.setAttribute('href', '{% url "shop:zamovlenya_usp" %}');
+          return;  
         } else {
-            continueBtn.href = 'oplata.html';
+            continueBtn.setAttribute('href', '{% url "shop:oplata" %}');
         }
     });
 });
