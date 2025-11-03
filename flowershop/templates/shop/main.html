@@ -6,37 +6,40 @@
 
 {% block content %}
     <main class="content">
-        <form method="get" action="" class="search-bar">
-            <input type="text" name="q" placeholder="Пошук..." value="{{ request.GET.q }}">
+        <form method="get" action="{% url "shop:main" %}" class="search-bar">
+            <input type="text" name="q" placeholder="Пошук..." value="{{ request.GET.q|default:'' }}">
+            <input type="hidden" name="flower_type" value="{{ request.GET.flower_type|default:'' }}">
+            <input type="hidden" name="price_order" value="{{ request.GET.price_order|default:'' }}">
             <button type="submit">
                 <img src="{% static 'shop/images/str.png' %}" alt="search">
             </button>
         </form>
         <div class="filt">
             <h3>Фільтри</h3>
+            <form method="get" action="{% url "shop:main" %}" class="filters">
+    
+                <input type="hidden" name="q" value="{{ request.GET.q|default:'' }}">
+                <select name="flower_type">
+                    <option value="">Квіти</option>
+                    {% for flower in flower_types %}
+                        <option value="{{ flower.name }}" {% if request.GET.flower_type == flower.name %}selected{% endif %}>
+                            {{ flower.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+    
+                <select name="price_order">
+                    <option value="">Ціна</option>
+                    <option value="asc" {% if request.GET.price_order == 'asc' %}selected{% endif %}>Від дешевших до дорожчих</option>
+                    <option value="desc" {% if request.GET.price_order == 'desc' %}selected{% endif %}>Від дорожчих до дешевших</option>
+                </select>
+    
+                <button type="submit" style="display:none;"></button>
+                
+            </form>
         </div>
 
 
-        <form method="get" action="" class="filters">
-
-            <select name="flower_type">
-                <option value="">Квіти</option>
-                {% for flower in flower_types %}
-                    <option value="{{ flower }}" {% if request.GET.flower_type == flower %}selected{% endif %}>
-                        {{ flower.name }}
-                    </option>
-                {% endfor %}
-            </select>
-
-            <select name="price_order">
-                <option value="">Ціна</option>
-                <option value="asc" {% if request.GET.price_order == 'asc' %}selected{% endif %}>Від дешевших до дорожчих</option>
-                <option value="desc" {% if request.GET.price_order == 'desc' %}selected{% endif %}>Від дорожчих до дешевших</option>
-            </select>
-
-            <button type="submit" style="display:none;"></button>
-            
-        </form>
 
 
         <div class="products">
@@ -63,13 +66,13 @@
 
     <div class="pagination">
         {% if bouquets.has_previous %}
-            <a href="?page={{ bouquets.previous_page_number }}&flower={{ selected_flower }}" class="btn">Попередня сторінка</a>
+            <a href="?page={{ bouquets.previous_page_number }}&q={{ request.GET.q }}&flower_type={{ request.GET.flower_type }}&price_order={{ request.GET.price_order }}" class="btn">Попередня сторінка</a>
         {% endif %}
         
         <span>Сторінка {{ bouquets.number }} з {{ bouquets.paginator.num_pages }}</span>
         
         {% if bouquets.has_next %}
-            <a href="?page={{ bouquets.next_page_number }}&flower={{ selected_flower }}" class="btn">Дивитися ще</a>
+            <a href="?page={{ bouquets.next_page_number }}&q={{ request.GET.q }}&flower_type={{ request.GET.flower_type }}&price_order={{ request.GET.price_order }}" class="btn">Дивитися ще</a>
         {% endif %}
     </div>
 

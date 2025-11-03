@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout, update_session_auth
 from .forms import *
 from .models import *
 from django.core.paginator import Paginator
+from django.db.models import Q
 
 def home(request):
     form = LoginForm(request.POST or None)
@@ -84,15 +85,30 @@ def change_password(request):
 
 
 def main(request):
-    flower_types = FlowerType.objects.all()
+    query = request.GET.get('q', '')
+    flower_type = request.GET.get('flower_type', '')
+    price_order = request.GET.get('price_order', '')
     bouquets = Bouquet.objects.all()
+    
+    if query:
+        bouquets = bouquets.filter(
+            Q(name__icontains=query) | Q(composition__icontains=query)
+        )
+    if flower_type:
+        bouquets = bouquets.filter(flowers__name=flower_type)
+    
+    if price_order == 'asc':
+        bouquets = bouquets.order_by('price')
+    elif price_order == 'desc':
+        bouquets = bouquets.order_by('-price')
     
     paginator = Paginator(bouquets, 8)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     
+    flower_types = FlowerType.objects.all()
+    
     context = {
-        'bouquets': bouquets,
         'flower_types': flower_types,
         'bouquets': page_obj
     }
