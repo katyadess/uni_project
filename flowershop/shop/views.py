@@ -1,23 +1,25 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
-
+from .forms import *
 from .models import *
 
 
 def home(request):
-    if request.method == "POST":
-        email = request.POST.get("email")
-        password = request.POST.get("password")
-        
+    form = LoginForm(request.POST or None)
+    
+    if request.method == "POST" and form.is_valid():
+        email = form.cleaned_data["email"]
+        password = form.cleaned_data["password"]
         user = authenticate(request, email=email, password=password)
+        
         if user is not None:
             login(request, user)
             return redirect('shop:profile')
         else:
-            return render(request, 'shop:home', {'form': {'errors': True}})
+            form.add_error(None, 'Невірна пошта або пароль.')
     
-    return render(request, 'shop/home.html')
+    return render(request, 'shop/home.html', {'form': form})
 
 def registration(request):
     return render(request, 'shop/registration.html')

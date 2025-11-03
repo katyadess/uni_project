@@ -42,7 +42,11 @@ INSTALLED_APPS = [
     'shop', 
     'cart', 
     'orders',
+    'users',
 ]
+
+AUTH_USER_MODEL = 'users.CustomUser'
+AUTHENTICATION_BACKENDS = ['users.backends.EmailBackend']
 
 
 MIDDLEWARE = [
