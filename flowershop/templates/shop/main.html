@@ -23,7 +23,7 @@
                 <option value="">Квіти</option>
                 {% for flower in flower_types %}
                     <option value="{{ flower }}" {% if request.GET.flower_type == flower %}selected{% endif %}>
-                        {{ flower }}
+                        {{ flower.name }}
                     </option>
                 {% endfor %}
             </select>
@@ -40,139 +40,38 @@
 
 
         <div class="products">
-            <a href="{% url "shop:pro_tovar" %}" class="card-link">
-                <div class="card">
-                    <img src="{% static "shop/images/flowers.png" %}" alt="">
-                    <div class="price">1500 грн</div>
-                </div>
-            </a>
-            <a href="{% url "shop:pro_tovar" %}" class="card-link">
-                <div class="card">
-                    <img src="{% static "shop/images/image.png" %}" alt="">
-                    <div class="price">1500 грн</div>
-                </div>
-            </a>
-            <a href="{% url "shop:pro_tovar" %}" class="card-link">
-                <div class="card">
-                    <img src="" alt="">
-                    <div class="price">1500 грн</div>
-                </div>
-            </a>
-            <a href="{% url "shop:pro_tovar" %}" class="card-link">
-                <div class="card">
-                    <img src="" alt="">
-                    <div class="price">1500 грн</div>
-                </div>
-            </a>
-            <a href="{% url "shop:pro_tovar" %}" class="card-link">
-                <div class="card">
-                    <img src="" alt="">
-                    <div class="price">1500 грн</div>
-                </div>
-            </a>
-            <a href="{% url "shop:pro_tovar" %}" class="card-link">
-                <div class="card">
-                    <img src="" alt="">
-                    <div class="price">1500 грн</div>
-                </div>
-            </a>
-            <a href="{% url "shop:pro_tovar" %}" class="card-link">
-                <div class="card">
-                    <img src="" alt="">
-                    <div class="price">1500 грн</div>
-                </div>
-            </a>
-            <a href="{% url "shop:pro_tovar" %}" class="card-link">
-                <div class="card">
-                    <img src="" alt="">
-                    <div class="price">1500 грн</div>
-                </div>
-            </a>
-
-
-            <a href="{% url "shop:pro_tovar" %}" class="card-link">
-                <div class="card">
-                    <img src="" alt="">
-                    <div class="price">1500 грн</div>
-                </div>
-            </a>
-            <a href="{% url "shop:pro_tovar" %}" class="card-link">
-                <div class="card">
-                    <img src="" alt="">
-                    <div class="price">1500 грн</div>
-                </div>
-            </a>
-            <a href="{% url "shop:pro_tovar" %}" class="card-link">
-                <div class="card">
-                    <img src="" alt="">
-                    <div class="price">1500 грн</div>
-                </div>
-            </a>
-            <a href="{% url "shop:pro_tovar" %}" class="card-link">
-                <div class="card">
-                    <img src="" alt="">
-                    <div class="price">1500 грн</div>
-                </div>
-            </a>
-
-
-            <a href="{% url "shop:pro_tovar" %}" class="card-link">
-                <div class="card">
-                    <img src="" alt="">
-                    <div class="price">1500 грн</div>
-                </div>
-            </a>
-            <a href="{% url "shop:pro_tovar" %}" class="card-link">
-                <div class="card">
-                    <img src="" alt="">
-                    <div class="price">1500 грн</div>
-                </div>
-            </a>
-            <a href="{% url "shop:pro_tovar" %}" class="card-link">
-                <div class="card">
-                    <img src="" alt="">
-                    <div class="price">1500 грн</div>
-                </div>
-            </a>
-            <a href="{% url "shop:pro_tovar" %}" class="card-link">
-                <div class="card">
-                    <img src="" alt="">
-                    <div class="price">1500 грн</div>
-                </div>
-            </a>
-
-
-            <a href="{% url "shop:pro_tovar" %}" class="card-link">
-                <div class="card">
-                    <img src="" alt="">
-                    <div class="price">1500 грн</div>
-                </div>
-            </a>
-            <a href="{% url "shop:pro_tovar" %}" class="card-link">
-                <div class="card">
-                    <img src="" alt="">
-                    <div class="price">1500 грн</div>
-                </div>
-            </a>
-            <a href="{% url "shop:pro_tovar" %}" class="card-link">
-                <div class="card">
-                    <img src="" alt="">
-                    <div class="price">1500 грн</div>
-                </div>
-            </a>
-            <a href="{% url "shop:pro_tovar" %}" class="card-link">
-                <div class="card">
-                    <img src="" alt="">
-                    <div class="price">1500 грн</div>
-                </div>
-            </a>
+            {% for bouquet in bouquets %}
+                <a href="{% url "shop:pro_tovar" bouquet.id %}" class="card-link">
+                    <div class="card">
+                        <img src="{{ bouquet.image.url }}" alt="{{ bouquet.name }}">
+                        <div class="flower-name">{{ bouquet.name }}</div>
+                        <div class="price">
+                            {% if bouquet.new_price %}
+                                <span class="old-price">{{ bouquet.price }} грн</span>
+                                <span class="new-price">{{ bouquet.new_price }} грн</span>
+                            {% else %}
+                                {{ bouquet.price }} грн
+                            {% endif %}
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+            
         </div>
     </main>
 
-    {% comment %} pagination {% endcomment %}
-    <a href="main2_.html">
-        <button class="btn">ДИВИТИСЯ ЩЕ</button>
-    </a>
+
+    <div class="pagination">
+        {% if bouquets.has_previous %}
+            <a href="?page={{ bouquets.previous_page_number }}&flower={{ selected_flower }}" class="btn">Попередня сторінка</a>
+        {% endif %}
+        
+        <span>Сторінка {{ bouquets.number }} з {{ bouquets.paginator.num_pages }}</span>
+        
+        {% if bouquets.has_next %}
+            <a href="?page={{ bouquets.next_page_number }}&flower={{ selected_flower }}" class="btn">Дивитися ще</a>
+        {% endif %}
+    </div>
 
     <div class="consult">
         <p>Потрібна Консультація?</p>

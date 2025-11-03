@@ -3,8 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from .forms import *
 from .models import *
-from django.contrib.auth.views import PasswordChangeView
-from django.urls import reverse_lazy
+from django.core.paginator import Paginator
 
 def home(request):
     form = LoginForm(request.POST or None)
@@ -85,7 +84,19 @@ def change_password(request):
 
 
 def main(request):
-    return render(request, 'shop/main.html')
+    flower_types = FlowerType.objects.all()
+    bouquets = Bouquet.objects.all()
+    
+    paginator = Paginator(bouquets, 8)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
+    context = {
+        'bouquets': bouquets,
+        'flower_types': flower_types,
+        'bouquets': page_obj
+    }
+    return render(request, 'shop/main.html', context)
 
 # изменения не нужны
 def about_us(request):
