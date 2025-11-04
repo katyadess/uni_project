@@ -9,6 +9,13 @@ class Order(models.Model):
         ('express', 'Експрес (~30 хвилин +99 грн)'),
         ('pickup', 'Самовивіз (безкоштовно)'),
     ]
+    
+    PAYMENT_METHODS = [
+        ('card', 'Оплата карткою (Visa/MasterCard)'),
+        ('cash', 'Наложений платіж (готівкою або терміналом)'),
+        ('applepay', 'Apple Pay'),
+        ('googlepay', 'Google Pay'),
+    ]
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
     user_name = models.CharField(max_length=100)
@@ -21,7 +28,8 @@ class Order(models.Model):
     card_message = models.TextField(blank=True, null=True)
 
     delivery_method = models.CharField(max_length=20, choices=DELIVERY_METHODS, default='standard')
-    
+    payment_method = models.CharField(max_length=20, choices=PAYMENT_METHODS, default='card')  # 🧠 Додано тут!
+
     street = models.CharField(max_length=255, blank=True, null=True)
     house = models.CharField(max_length=50, blank=True, null=True)
     apartment = models.CharField(max_length=50, blank=True, null=True)

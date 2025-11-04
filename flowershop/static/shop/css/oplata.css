@@ -4,7 +4,7 @@
     color: #000;
     margin-bottom: 79px;
     margin-left: 200px;
-}
+} 
 
 .payment-main-container {
     width: 100%;
@@ -107,82 +107,3 @@
     background-color: #F8C1CD; 
 }
 
-.bg {
-  max-width: 900px;
-  
-  margin: 30px auto; 
-  
-  background-image: radial-gradient(
-    ellipse 80% 80% at center, 
-    #F8C1CD 0%, 
-    transparent 70%
-  );
-  border-radius: 25px; 
-  padding: 20px 0; 
-}
-
-.feedback-module {
-    max-width: 700px;
-  margin: 0 auto; 
-  padding: 20px;
-  border-radius: 25px;
-  border-color: #B7DCAB;
-  font-family: 'Montserrat Alternates', sans-serif;
-  font-weight: medium;
-  color: #000;
-  background-color: transparent; 
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.feedback-module p {
-  font-weight: 500;
-  margin-top: 0;  
-  margin-bottom: 0;
-  font-size: medium; 
-}
-
-.feedback-module textarea {
-    width: 100%;
-    min-height: 80px;
-    padding: 15px;
-    border-radius: 50px;
-    background-color: #CAD3B5; 
-    font-family: 'Montserrat Alternates', sans-serif;
-    color: #000;
-    resize: vertical;
-    font-size: medium;
-    border: 1px solid #B7DCAB;
-}
-
-.feedback-module textarea::placeholder {
-    color: #000;
-    opacity: 1;
-}
-
-.vidguk-text {
-  margin-right: 0;
-  font-weight: 500;
-  margin-top: 0;
-  font-size: medium;
-}
-
-.send-button {
-  background-color: #F8C1CD;
-  color: #000;
-  border: none;
-  border-radius: 30px;
-  padding: 10px 30px;
-  font-family: 'Montserrat Alternates', sans-serif;
-  font-weight: 700;
-  cursor: pointer;
-  transition: background-color 0.2s;
-  align-self: flex-end; 
-  margin-left: 0;
-  margin-top: 0;
-}
-
-.send-button:hover {
-    background-color:  #E4ABB3;
-}
