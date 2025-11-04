@@ -22,7 +22,12 @@ def home(request):
         else:
             form.add_error(None, 'Невірна пошта або пароль.')
     
-    return render(request, 'shop/home.html', {'form': form})
+    latest_reviews = BouquetReview.objects.select_related('bouquet').order_by('-created_at')[:3]
+    
+    return render(request, 'shop/home.html', {
+        'form': form, 
+        'latest_reviews': latest_reviews,
+    })
 
 def registration(request):
     form = RegistrationForm(request.POST or None)
@@ -33,7 +38,12 @@ def registration(request):
         login(request, user)
         return redirect('shop:profile')
     
-    return render(request, 'shop/registration.html', {'form': form})
+    latest_reviews = BouquetReview.objects.select_related('bouquet').order_by('-created_at')[:3]
+    
+    return render(request, 'shop/registration.html', {
+        'form': form,
+        'latest_reviews': latest_reviews,
+    })
 
 @login_required(login_url='shop:home')
 def profile(request):

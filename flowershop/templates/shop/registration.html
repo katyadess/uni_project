@@ -81,7 +81,7 @@
                 роблять нас надійним вибором для<br>
                 найважливіших моментів.
             </p>
-        </div>
+        </div> 
         <div class="client">
             <h3>Ставай нашим<br> постійним клієнтом і<br> отримуй знижку -10%</h3>
         </div>
@@ -90,26 +90,13 @@
                 <p>Прочитай, Що Є Сказати Іншим</p>
         </div>
         <div class="cards">
-            <div class="card">
-                <img src="{% static "shop/images/MaskGroup2.png" %}" alt="photo">
-                <h4>OLIVIA COLE</h4>
-                <p>Замовляла букет до дня народження — усе просто неймовірно! Квіти свіжі, ароматні, оформлення дуже
-                    ніжне. Доставили точно вчасно.</p>
-            </div>
-
-            <div class="card">
-                <img src="{% static "shop/images/MaskGroup1.png" %}" alt="photo">
-                <h4>JESSICA PAGE</h4>
-                <p>Дуже люблю ваші букети — завжди стильні, сучасні й зі смаком. Навіть через кілька днів виглядають,
-                    ніби щойно зібрані!</p>
-            </div>
-
-            <div class="card">
-                <img src="{% static "shop/images/MaskGroup.png" %}" alt="photo">
-                <h4>EVAN WHITE</h4>
-                <p>Приємно здивований сервісом! Консультант допоміг обрати композицію, яка перевершила очікування. Тепер
-                    тільки тут беру квіти.</p>
-            </div>
+            {% for review in latest_reviews %}
+                <div class="card">
+                    <h4>{{ review.user.first_name }} {% if review.user.last_name %}{{review.user.last_name}}{% endif %}</h4>
+                    <p>{{ review.text | truncatewords:25 }}</p>
+                    <a href="{{ review.bouquet.get_absolute_url }}" class="review-link">Перейти до букета</a>
+                </div>
+            {% endfor %}
         </div>
         <div class="gradient-box-wrapper">
             <div class="fog fog1"></div>

@@ -6,7 +6,7 @@
 
 {% block content %}
     <main class="product-page-container">
-        <a href="javascript:history.back()" class="nav-link" id="back-arrow-button">
+        <a href="{% url "shop:main" %}" class="nav-link" id="back-arrow-button">
             <i class="bi bi-arrow-left"></i> Повернутися на головну
         </a>
         <section class="product-details-section">

@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.urls import reverse
 
 # Create your models here.
 class FlowerType(models.Model):
@@ -19,6 +20,9 @@ class Bouquet(models.Model):
 
     def __str__(self):
             return self.name
+    
+    def get_absolute_url(self):
+        return reverse('shop:pro_tovar', args=[str(self.id)])
         
 class BouquetReview(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -44,6 +48,6 @@ class UserData(models.Model):
         verbose_name_plural = 'UserData'
         
     def __str__(self) -> str:
-        return self.user.email
+        return self.user.email 
     
 
