@@ -1,10 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from .forms import *
 from .models import *
 from django.core.paginator import Paginator
-from django.db.models import Q
+from django.db.models import Q, F, Value, DecimalField
+from django.db.models.functions import Coalesce
 from django.db.models.functions import Lower
 
 def home(request):
@@ -103,13 +104,24 @@ def main(request):
         bouquets = bouquets.filter(flowers__name=flower_type)
     
     if price_order == 'asc':
-        bouquets = bouquets.order_by('price')
+        bouquets = bouquets.annotate(
+            effective_price=Coalesce('new_price', 'price', output_field=DecimalField())
+        ).order_by('effective_price')
+
     elif price_order == 'desc':
-        bouquets = bouquets.order_by('-price')
+        bouquets = bouquets.annotate(
+            effective_price=Coalesce('new_price', 'price', output_field=DecimalField())
+        ).order_by('-effective_price')
     
     paginator = Paginator(bouquets, 8)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
+    
+    for bouquet in page_obj:
+        if bouquet.new_price and bouquet.price:
+            bouquet.discount = round((bouquet.price - bouquet.new_price) / bouquet.price * 100)
+        else:
+            bouquet.discount = 0
     
     flower_types = FlowerType.objects.all()
     
@@ -128,8 +140,40 @@ def payment(request):
     return render(request, 'shop/oplata_info.html')
 
 
-def pro_tovar(request):
-    return render(request, 'shop/pro_tovar.html')
+def pro_tovar(request, id):
+    bouquet = get_object_or_404(Bouquet, id=id)
+    reviews = bouquet.reviews.all()
+    
+    if request.method == 'POST':
+        if not request.user.is_authenticated:
+            return redirect('shop:home')
+        review_form = BouquetReviewForm(request.POST)
+        if review_form.is_valid():
+            review = review_form.save(commit=False)
+            review.bouquet = bouquet
+            review.user = request.user
+            review.save()
+            return redirect('shop:pro_tovar', id=bouquet.id)
+    else:
+        review_form = BouquetReviewForm()
+        
+    discount = None
+    if bouquet.new_price:
+        discount = round((bouquet.price - bouquet.new_price) / bouquet.price * 100)
+    
+    paginator = Paginator(reviews, 5)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
+    context = {
+        'bouquet': bouquet,
+        'discount': discount,
+        'review_form': review_form,
+        'reviews': page_obj.object_list,
+        'page_obj': page_obj,
+    }
+    
+    return render(request, 'shop/pro_tovar.html', context)
 
 def oplata(request):
     return render(request, 'shop/oplata.html')

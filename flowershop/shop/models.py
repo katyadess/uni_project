@@ -22,8 +22,8 @@ class Bouquet(models.Model):
         
 class BouquetReview(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    bouquet = models.ForeignKey(Bouquet, on_delete=models.CASCADE)
-    text = models.TextField()
+    bouquet = models.ForeignKey(Bouquet, on_delete=models.CASCADE, related_name='reviews')
+    text = models.TextField(verbose_name='Відгук')
     created_at = models.DateTimeField(auto_now_add=True)
     
     class Meta:
@@ -32,7 +32,7 @@ class BouquetReview(models.Model):
         verbose_name_plural = "Відгуки"
         
     def __str__(self):
-        return f"{self.user.username}"
+        return f"Відгук від {self.user.email} на {self.bouquet.name}"
     
 
 class UserData(models.Model):
@@ -45,3 +45,5 @@ class UserData(models.Model):
         
     def __str__(self) -> str:
         return self.user.email
+    
+

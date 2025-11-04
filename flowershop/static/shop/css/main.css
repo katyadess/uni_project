@@ -65,7 +65,7 @@ body {
     font-size: 16px;
     transition: 0.3s;
 }
-
+ 
 .search-bar input:focus {
     background: #B7DCABcc;
 }
@@ -158,15 +158,30 @@ body {
 }
 
 .price {
-    background: #d8e4b8;
-    border: 2px solid #f8a8c1;
-    border-radius: 20px;
     display: inline-block;
     padding: 5px 20px;
     margin-top: 10px;
     font-weight: 600;
     color: var(--clr-text);
     cursor: pointer;
+}
+
+.price .new-price {
+    background: #d8e4b8;
+    border: 2px solid #f8a8c1;
+    border-radius: 8px;
+    padding: 5px 20px;
+}
+
+.discount-badge {
+    background-color: #F58EB1;
+    color: black;
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 16px;
+    border: 2px solid #f8a8c1;
+    
 }
 
 .btn {

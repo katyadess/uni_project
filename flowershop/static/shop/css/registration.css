@@ -587,6 +587,7 @@ button.register-btn {
     height: 50px;
     border-radius: 83px;
     font-family: 'Montserrat Alternates', sans-serif;
+    cursor: pointer;
 }
 
 .back-to-top {

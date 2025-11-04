@@ -110,3 +110,13 @@ class ChangePasswordForm(forms.Form):
         if p1 and p2 and p1 != p2:
             self.add_error('new_password2', 'Паролі не співпадають.')
         return cleaned_data
+    
+class BouquetReviewForm(forms.ModelForm):
+    class Meta:
+        model = BouquetReview
+        fields = ['text']
+        widgets = {
+            'text': forms.Textarea(attrs={
+                'placeholder': 'Чудові квіти!',
+            })
+        }

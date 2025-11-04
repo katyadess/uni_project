@@ -12,19 +12,24 @@
         <section class="product-details-section">
             <div class="product-layout">
                 <div class="product-image-container">
-                    <img src="images/букет.svg" alt="Букет Назва"> </div>
-
+                    <img src="{{ bouquet.image.url }}" alt="{{ bouquet.name }}"> </div>
                 <div class="product-info-container">
-                    <h1 class="product-title">Букет "Назва"</h1>
+                    <h1 class="product-title">Букет {{ bouquet.name }}</h1>
                     <div class="product-price">
-                        <span class="old-price">2500 грн</span>
-                        <span class="new-price">1500 грн</span>
-                        <span class="discount-badge">-40%</span>
+                        {% if bouquet.new_price %}
+                            <span class="old-price">{{ bouquet.price|floatformat:0 }} грн</span>
+                            <span class="new-price">{{ bouquet.new_price|floatformat:0 }} грн</span>
+                            <span class="discount-badge">-{{ discount|floatformat:0 }}%</span>
+                        {% else %}
+                            <span class="new-price">{{ bouquet.price|floatformat:0 }} грн</span>
+                        {% endif %}
                     </div>
+
+                    {% comment %} form {% endcomment %}
                     <button class="order-button">Замовити</button>
 
                     <p class="product-composition">
-                        <strong>Склад:</strong> 41 гілка піоновидних кущових рожевих троянд
+                        <strong>Склад:</strong> {{bouquet.composition}}
                     </p>
                     <p class="product-guarantee">
                         <strong>Гарантія якості:</strong> квіти простоять не менш ніж 5 днів, в іншому випадку ми їх замінимо
@@ -36,9 +41,7 @@
                         </div>
                         <div class="tabs-content">
                             <div id="description" class="tab-pane active">
-                                <p>Це вишуканий букет, що складається з ніжних, високоякісних піоновидних троянд.</p>
-                                <p>Квіти мають ніжні рожеві та кремові відтінки, а їхні пишні, багатоквіткові бутони виглядають бездоганно, а мінімалістичний сірий пакувальний папір підкреслює його елегантність.</p>
-                                <p>Це надзвичайно делікатна композиція, що неодмінно подарує щиру посмішку тому, хто її отримає.</p>
+                                <p>{{bouquet.description}}</p>
                             </div>
                         </div>
                     </div>
@@ -49,39 +52,44 @@
         <section class="product-reviews">
             <h2 class="reviews-title">Відгуки про товар</h2>
             <div class="reviews-list">
-                <div class="review-item">
-                    <div class="review-header">
-                        <span class="review-author">ТАНЯ</span>
-                        <span class="review-date">03.10.2025</span>
+                {% for review in reviews %}
+                    <div class="review-item">
+                        <div class="review-header">
+                            <span class="review-author">{{review.user.first_name}}</span>
+                            <span class="review-date">{{ review.created_at|date:"d.m.Y" }}</span>
+                        </div>
+                        <p class="review-body">{{review.text}}</p>
                     </div>
-                    <p class="review-body">чудові квіти! все гарно!</p>
-                </div>
-                <div class="review-item">
-                    <div class="review-header">
-                        <span class="review-author">КАТЕРИНА</span>
-                        <span class="review-date">25.08.2025</span>
-                    </div>
-                    <p class="review-body">Зробила на сайті замовлення для мами,все вчасно доставили,квіти дуже гарні,дуже свіжі і рекомендую користуватися доставкою квітів у вас своїм друзям.Дуже дякую за чудовий сервіс</p>
-                </div>
-                <div class="review-item">
-                    <div class="review-header">
-                        <span class="review-author">ЛЕСЯ</span>
-                        <span class="review-date">19.08.2025</span>
-                    </div>
-                    <p class="review-body">все сподобалося! доставка швидка! букет красивий, дякую)</p>
-                </div>
+                {% empty %}
+                    <p>Поки що немає відгуків. Будьте першим!</p>
+                {% endfor %}
             </div>
+            
+            <div class="pagination">
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}" class="pagination-button">← Назад</a>
+                {% endif %}
 
-            {% comment %} comments pagination {% endcomment %}
-            <button class="see-more-reviews">ДИВИТИСЯ ЩЕ</button>
+                <span class="current-page">Сторінка {{ page_obj.number }} з {{ page_obj.paginator.num_pages }}</span>
+
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}" class="pagination-button">Далі →</a>
+                {% endif %}
+            </div>
+            
         </section>
 
         <section class="add-review-section">
             <h3 class="add-review-title">Купляли цей товар? Залишіть відгук</h3>
-            <form class="review-form">
-                <textarea placeholder="Чудові квіти!"></textarea>
-                <button type="submit" class="submit-review-button">Надіслати</button>
-            </form>
+            {% if user.is_authenticated %}
+                <form class="review-form" method="POST" action="{% url "shop:pro_tovar" bouquet.id %}">
+                    {% csrf_token %}
+                    {{ review_form.text }}
+                    <button type="submit" class="submit-review-button" name="send-review">Надіслати</button>
+                </form>
+            {% else %}
+                <p>Щоб залишити відгук, <a href="{% url 'shop:home' %}">увійдіть у свій акаунт</a>.</p>
+            {% endif %}
         </section>
 
     </main>

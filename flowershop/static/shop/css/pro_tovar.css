@@ -6,7 +6,7 @@ main.product-page-container {
     color: #333;
 }
 
-.product-layout {
+.product-layout { 
     display: flex;
     gap: 40px;
     margin-bottom: 50px;
@@ -142,6 +142,33 @@ main.product-page-container {
 
 .product-reviews {
     margin: 60px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-reviews .pagination {
+    margin-top: 30px;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.pagination a {
+    background-color: #F8C1CD; /* Світло-рожевий */
+    color: #333;
+    font-weight: 600;
+    font-family: var(--ff);
+    padding: 10px 25px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+.pagination a:hover {
+    background-color: #f3b0c1;
 }
 
 .reviews-title {
@@ -182,22 +209,7 @@ main.product-page-container {
     line-height: 1.5;
 }
 
-.see-more-reviews {
-    display: block;
-    margin: 30px auto 0;
-    background-color: #F8C1CD; /* Світло-рожевий */
-    color: #333;
-    font-weight: 600;
-    font-family: var(--ff);
-    padding: 15px 40px;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 18px;
-    transition: background-color 0.3s ease;
-}
-.see-more-reviews:hover {
-    background-color: #f3b0c1;
-}
+
 
 /* --- "Залишити відгук" --- */
 .add-review-section {
@@ -207,6 +219,14 @@ main.product-page-container {
     gap: 30px;
     margin-bottom: 60px;
     flex-wrap: wrap; /* Для мобільних */
+}
+
+.add-review-section p > a {
+    color:#fff;
+}
+
+.add-review-section p > a:hover {
+    color: #777;
 }
 
 .add-review-title {

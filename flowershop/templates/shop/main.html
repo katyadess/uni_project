@@ -50,10 +50,10 @@
                         <div class="flower-name">{{ bouquet.name }}</div>
                         <div class="price">
                             {% if bouquet.new_price %}
-                                <span class="old-price">{{ bouquet.price }} грн</span>
-                                <span class="new-price">{{ bouquet.new_price }} грн</span>
+                                <span class="new-price">{{ bouquet.new_price|floatformat:0 }} грн</span>
+                                <span class="discount-badge">-{{ bouquet.discount }}%</span>
                             {% else %}
-                                {{ bouquet.price }} грн
+                                <span class="new-price">{{ bouquet.price |floatformat:0 }} грн</span>
                             {% endif %}
                         </div>
                     </div>
