@@ -166,75 +166,51 @@
                 <div class="order">
                     <p class="order-content-word">Ваше замовлення</p>
                     <div class="order-content-items">
-                        <div class="items">
-                            <div class="item">
-                                <div class="item-details">
-                                    <div class="img">
-                                        <img src="../css_files/bouqet.png" alt="item" class="item-image">
-                                    </div>
-                                    <div class="details">
-                                        <div class="flower-details">
-                                            <p class="item-name">Букет "Романтика"</p>
-                                            <form class="quantity-form" method="POST" action="#">
+                        {% if cart %}
+                            <div class="items">
+                                {% for item in cart %}
+                                    <div class="item">
+                                        <div class="item-details">
+                                            <div class="img">
+                                                <img src="{{ item.bouquet.image.url }}" alt="{{ item.bouquet.name }}" class="item-image">
+                                            </div>
+                                            <div class="details">
+                                                <div class="flower-details">
+                                                    <p class="item-name">Букет {{item.bouquet.name }}</p>
+                                                    <form class="quantity-form" method="POST" action="{% url "cart:cart" %}">
+                                                        {% csrf_token %}
+                                                        <button type="submit" name="decrease" class="minus-btn">−</button>
+                                                        <input type="number" name="quantity" class="number" value="{{item.quantity}}" min="1" readonly>
+                                                        <input type="hidden" name="bouquet_id" value="{{item.bouquet.id}}">
+                                                        <button type="submit" name="increase" class="plus-btn">+</button>
+                                                    </form>
+                                                </div>
+                                                <div class="flower-price">
+                                                    <span class="price">{{item.price|floatformat:0}} грн</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="remove">
+                                            <form action="{% url "cart:cart" %}" method="POST" class="remove-form">
                                                 {% csrf_token %}
-                                                <button type="button" name="decrease_quantity" class="minus-btn">−</button>
-                                                <input type="number" name="quantity" class="number" value="1" min="1" readonly>
-                                                <button type="button" name="increase_quantity" class="plus-btn">+</button>
+                                                <input type="hidden" name="bouquet_id" value="{{item.bouquet.id}}">
+                                                <button type='submit' name="remove" class="remove-btn">×</button>
                                             </form>
                                         </div>
-                                        <div class="flower-price">
-                                            <span class="price">799 грн</span>
-                                        </div>
                                     </div>
-                                </div>
-                                <div class="remove">
-                                    <form action="#" method="POST" class="remove-form">
-                                        {% csrf_token %}
-                                        <input type="hidden" name="product_id" value="{{product.id}}">
-                                        <button type='submit' name='toggle-cart' class="remove-btn">×</button>
-                                    </form>
-                                </div>
+                                {% endfor %}
                             </div>
-                            <div class="item">
-                                <div class="item-details">
-                                    <div class="img">
-                                        <img src="../css_files/bouqet.png" alt="item" class="item-image">
-                                    </div>
-                                    <div class="details">
-                                        <div class="flower-details">
-                                            <p class="item-name">Букет "Романтика"</p>
-                                            <form class="quantity-form" method="POST" action="#">
-                                                {% csrf_token %}
-                                                <button type="button" name="decrease_quantity" class="minus-btn">−</button>
-                                                <input type="number" name="quantity" class="number" value="1" min="1" readonly>
-                                                <button type="button" name="increase_quantity" class="plus-btn">+</button>
-                                            </form>
-                                        </div>
-                                        <div class="flower-price">
-                                            <span class="price">799 грн</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="remove">
-                                    <form action="#" method="POST" class="remove-form">
-                                        {% csrf_token %}
-                                        <input type="hidden" name="product_id" value="{{product.id}}">
-                                        <button type='submit' name='toggle-cart' class="remove-btn">×</button>
-                                    </form>
-                                </div>
+                            <div class="total">
+                                <span>Загальна вартість:</span>
+                                <span class="price">{{ cart.get_total_price|floatformat:0 }} грн</span>
                             </div>
-                        </div>
-                        <div class="total">
-                            <span>Загальна вартість:</span>
-                            <span class="price">799 грн</span>
-                        </div>
-
-                        <div class="total">
-                            <p class="empty">Ваш кошик порожній!</p>
-                        </div>
-
+                        {% else %}        
+                            <div class="total">
+                                <p class="empty">Ваш кошик порожній!</p>
+                            </div>
+                        {% endif %}
                     </div>
-                </div>
+                </div> 
 
                 <div class="suggestions">
                     <p class="suggestions-word">Може вам сподобатись</p>
@@ -276,7 +252,13 @@
                 </div>
 
                 <div class="submit-order">
-                    <button class="submit-order-btn"><a href="#">Оформити замовлення</a></button>
+                    {% if cart|length >= 1 %}
+                        <button class="submit-order-btn">
+                            <a href="{% url 'shop:sposob_oplaty' %}">Оформити замовлення</a>
+                        </button>
+                    {% else %}
+                        <button class="submit-order-btn"><a href="{% url "shop:main" %}">Обрати букет</a></button>
+                    {% endif %}
                 </div>
 
             </section>

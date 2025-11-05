@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from .forms import *
 from .models import *
+from cart.cart import Cart
 from django.core.paginator import Paginator
 from django.db.models import Q, F, Value, DecimalField
 from django.db.models.functions import Coalesce
@@ -155,15 +156,23 @@ def pro_tovar(request, id):
     reviews = bouquet.reviews.all()
     
     if request.method == 'POST':
-        if not request.user.is_authenticated:
-            return redirect('shop:home')
-        review_form = BouquetReviewForm(request.POST)
-        if review_form.is_valid():
-            review = review_form.save(commit=False)
-            review.bouquet = bouquet
-            review.user = request.user
-            review.save()
+        if 'send-review' in request.POST:
+            if not request.user.is_authenticated:
+                return redirect('shop:home')
+            review_form = BouquetReviewForm(request.POST)
+            if review_form.is_valid():
+                review = review_form.save(commit=False)
+                review.bouquet = bouquet
+                review.user = request.user
+                review.save()
+                return redirect('shop:pro_tovar', id=bouquet.id)
+        
+        if 'add-to-cart' in request.POST:
+            cart = Cart(request)
+            quantity = int(request.POST.get('quantity', 1))
+            cart.add(bouquet, quantity)
             return redirect('shop:pro_tovar', id=bouquet.id)
+        
     else:
         review_form = BouquetReviewForm()
         
