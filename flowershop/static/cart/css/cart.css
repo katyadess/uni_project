@@ -232,6 +232,27 @@
     border-radius: var(--brad);
 }
 
+.suggested-item .product-price .old-price {
+    font-size: var(--fs-item-name);
+    color: #888;
+    text-decoration: line-through;
+}
+
+.suggested-item .product-price .new-price {
+    font-size: var(--fs-item-name);
+    font-weight: 600;
+    color: #333;
+}
+
+.suggested-item .product-price .discount-badge {
+    background-color: #F58EB1;
+    color: black;
+    padding: 3px 6px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 12px;
+}
+
 .suggestions .btn {
     margin-top: 30px;
     background-color: #CAD4B5;
@@ -254,29 +275,43 @@
     background-color: inherit;
 }
 
-.submit-order {
+
+
+.submit-order a {
+    color: #4BAA4E;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.submit-order a:hover {
+    color: #377f3a;
+}
+    
+.submit-order form {
+    width: 100%;
+}
+
+
+
+.submit-order .submit-order-btn {
     background-color: #CAD4B5;
     border: var(--tc) 4px solid;
     border-radius: var(--brad);
     padding: 10px 20px;
     cursor: pointer;
     text-align: center;
-}
-
-
-.submit-order .submit-order-btn {
-    background-color: inherit;
-    cursor: pointer;
-}
-
-
-.submit-order .submit-order-btn a {
-    text-decoration: none;
     font-family: var(--ff);
     font-size: var(--fs-nav-info);
     font-weight: 600;
     color: var(--tc);
+    width: inherit;
 }
+
+.submit-order .submit-order-btn:hover{
+    background-color: var(--tc);
+    color: #CAD4B5;
+}
+
 
 .order-data {
     display: flex;

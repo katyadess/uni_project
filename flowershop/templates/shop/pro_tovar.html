@@ -19,7 +19,7 @@
                         {% if bouquet.new_price %}
                             <span class="old-price">{{ bouquet.price|floatformat:0 }} грн</span>
                             <span class="new-price">{{ bouquet.new_price|floatformat:0 }} грн</span>
-                            <span class="discount-badge">-{{ discount|floatformat:0 }}%</span>
+                            <span class="discount-badge">-{{ bouquet.discount|floatformat:0 }}%</span>
                         {% else %}
                             <span class="new-price">{{ bouquet.price|floatformat:0 }} грн</span>
                         {% endif %}

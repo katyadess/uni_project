@@ -215,51 +215,53 @@
                 <div class="suggestions">
                     <p class="suggestions-word">Може вам сподобатись</p>
                     <div class="suggested-items">
-                        <div class="suggested-item">
-                            <img src="../css_files/bouqet.png" alt="suggested item" class="suggested-item-image">
-                            <div class="item-details">
-                                <div class="item-text">
-                                    <p class="item-name">Букет "Романтика"</p>
-                                    <span class="price">799 грн</span>
+                        {% for bouquet in suggested %}
+                            <div class="suggested-item">
+                                <img src="{{bouquet.image.url}}" alt="{{bouquet.name}}" class="suggested-item-image">
+                                <div class="item-details">
+                                    <div class="item-text">
+                                        <p class="item-name">Букет {{bouquet.name}}</p>
+                                        <div class="product-price">
+                                            {% if bouquet.new_price %}
+                                                <span class="old-price">{{ bouquet.price|floatformat:0 }} грн</span>
+                                                <span class="new-price">{{ bouquet.new_price|floatformat:0 }} грн</span>
+                                                <span class="discount-badge">-{{ bouquet.discount|floatformat:0 }}%</span>
+                                            {% else %}
+                                                <span class="new-price">{{ bouquet.price|floatformat:0 }} грн</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <form class="add-to-cart-form" method="post" action="{% url "cart:cart" %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="bouquet_id" value="{{bouquet.id}}">
+                                        <button type="submit" name="add-to-cart" class="add-to-cart-btn">Додати в кошик</button>
+                                    </form>
                                 </div>
-                                <form class="add-to-cart-form" method="post" action="#">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="product_id" value="{{product.id}}">
-                                    <button type="submit" name="add_to_cart" class="add-to-cart-btn">Додати в кошик</button>
-                                </form>
                             </div>
-                        </div>
-                        <div class="suggested-item">
-                            <img src="../css_files/bouqet.png" alt="suggested item" class="suggested-item-image">
-                            <div class="item-details">
-                                <div class="item-text">
-                                    <p class="item-name">Букет "Романтика"</p>
-                                    <span class="price">799 грн</span>
-                                </div>
-                                <form class="add-to-cart-form" method="post" action="#">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="product_id" value="{{product.id}}">
-                                    <button type="submit" name="add_to_cart" class="add-to-cart-btn">Додати в кошик</button>
-                                </form>
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
                     <div class="btn">
-                        <a href="#">
+                        <a href="{% url "shop:main" %}">
                             <button>Дивитися ще</button>
                         </a>
                     </div>
                 </div>
 
+                {% if cart|length >= 1 %}
                 <div class="submit-order">
-                    {% if cart|length >= 1 %}
-                        <button class="submit-order-btn">
-                            <a href="{% url 'shop:sposob_oplaty' %}">Оформити замовлення</a>
+                    <form action="{% url "cart:cart" %}" method='POST'>
+                        {% csrf_token %}
+                        <button class="submit-order-btn" name='proceed-to-checkout' type='submit'>
+                            Оформити замовлення
                         </button>
-                    {% else %}
-                        <button class="submit-order-btn"><a href="{% url "shop:main" %}">Обрати букет</a></button>
-                    {% endif %}
+                    </form>
                 </div>
+                {% else %}
+                <div class="submit-order">
+                    <p>Знайдіть ідеальний букет для когось особливого</p>
+                    <a href="{% url "shop:main" %}">Перейти до каталогу...</a>
+                </div>
+                {% endif %}
 
             </section>
 

@@ -128,12 +128,6 @@ def main(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     
-    for bouquet in page_obj:
-        if bouquet.new_price and bouquet.price:
-            bouquet.discount = round((bouquet.price - bouquet.new_price) / bouquet.price * 100)
-        else:
-            bouquet.discount = 0
-    
     flower_types = FlowerType.objects.all()
     
     context = {
@@ -176,9 +170,6 @@ def pro_tovar(request, id):
     else:
         review_form = BouquetReviewForm()
         
-    discount = None
-    if bouquet.new_price:
-        discount = round((bouquet.price - bouquet.new_price) / bouquet.price * 100)
     
     paginator = Paginator(reviews, 5)
     page_number = request.GET.get('page')
@@ -186,7 +177,6 @@ def pro_tovar(request, id):
     
     context = {
         'bouquet': bouquet,
-        'discount': discount,
         'review_form': review_form,
         'reviews': page_obj.object_list,
         'page_obj': page_obj,
@@ -202,5 +192,9 @@ def shop_logout(request):
     return redirect('shop:home')
 
 def sposob_oplaty(request):
+    if not request.session.get('can_access_sposob_oplaty'):
+        return redirect('cart:cart')
+    
+    del request.session['can_access_sposob_oplaty']
     return render(request, 'shop/sposob_oplaty.html')
 

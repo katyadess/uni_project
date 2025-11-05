@@ -23,6 +23,11 @@ class Bouquet(models.Model):
     
     def get_absolute_url(self):
         return reverse('shop:pro_tovar', args=[str(self.id)])
+    
+    def discount(self):
+        if self.new_price:
+            return round((self.price - self.new_price) / self.price * 100)
+        return None
         
 class BouquetReview(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
