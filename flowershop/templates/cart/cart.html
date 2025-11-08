@@ -10,30 +10,29 @@
         <p class="main-word">Кошик</p>
 
         <div class="content">
-            <section class="order-data">
+            <form class="order-data" method="POST" action="{% url "cart:cart" %}">
+                {% csrf_token %}
 
                 <div class="user-data">
                     <p class="user-data-word">1. Ваші дані</p>
-                    <form action="#" class="user-data-form" method="post">
-                        {% csrf_token %}
+                    <div class="user-data-form">
                         <div class="inputs">
                             <div class="input-name">
                                 <span>Ім'я</span>
-                                <input type="text" name="user_name" class="user-data-input" required>
+                                {{order_form.user_name}}
                             </div>
                             <div class="input-tel">
                                 <span>Номер телефону</span>
-                                <input type="tel" name="user_tel" class="user-data-input" required>
+                                {{order_form.user_tel}}
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
 
                 <div class="add-info">
                     <p class="add-info-word">2. Кому доставити</p>
-                    <form class="form-box" method="post" action="#">
-
-                        {% csrf_token %}
+                    <div class="form-box">
+                       
                         <div class="toggle-buttons">
                             <button type="button" name="delivery_to_me" class="active">Мені</button>
                             <button type="button" name="delivery_to_other">Отримувачу</button>
@@ -41,67 +40,39 @@
 
                         <div class="inputs">
                             <div class="row">
-                                <input type="text" placeholder="Ім’я" name="recipient_name">
-                                <input type="text" placeholder="Номер телефону" name="recipient_phone">
+                                {{order_form.recipient_name}} 
+                                {{order_form.recipient_phone}}    
                             </div>
                         </div>
 
                         <div class="checkbox">
-                            <input type="checkbox" id="card" name="add_card" checked>
+                            {{order_form.add_card}}
                             <label for="card">Листівка <span class="price">+29грн</span></label>
                         </div>
 
-                        <textarea name="card_message" placeholder="Введіть текст листівки..."></textarea>
-                    </form>
+                        {{order_form.card_message}}
+                    </div>
                 </div>
 
                 <div class="delivery">
                     <p class="delivery-word">3. Куди доставити</p>
-                    <form class="delivery-options" method="post" action="#">
-                        {% csrf_token %}
+                    <div class="delivery-options">
+                        
 
                         <p class="subtitle">Спосіб доставки</p>
 
-                        <div class="delivery-box active standard">
-                            <label class="checkbox">
-                                <input type="radio" name="delivery_method" id="standard" value="standard" checked>
-                                <span>Стандартна | ~ 2 години</span>
-                            </label>
-
-                            <div class="inputs">
-                                <input type="text" name="street_standard" placeholder="Вулиця">
-                                <div class="row">
-                                    <input type="text" name="house_standard" placeholder="Будинок">
-                                    <input type="text" name="apartment_standard" placeholder="Квартира/Офіс">
-                                </div>
-                                <label class="checkbox">
-                                    <input type="checkbox" name="unknown_address_standard"> Я не знаю адресу
-                                </label>
-
-                                <div class="unknown-message hidden">
-                                    <p>Не хвилюйтесь! Ми самостійно зв’яжемося з отримувачем для уточнення адреси.</p>
-                                </div>
-
-                                <div class="row">
-                                    <input type="text" name="date_standard" placeholder="Дата">
-                                    <input type="text" name="time_standard" placeholder="Період">
-                                </div>
+                        <div class="delivery-box active">
+                            <div class="select-wrapper">
+                                {{ order_form.delivery_method }}
                             </div>
-                        </div>
-
-                        <div class="delivery-box exact-time">
-                            <label class="checkbox">
-                                <input type="radio" name="delivery_method" id="exact-time" value="exact-time">
-                                <span>В точний час | 99 грн</span>
-                            </label>
                             <div class="inputs">
-                                <input type="text" name="street_exact" placeholder="Вулиця">
+                                {{order_form.street}}
                                 <div class="row">
-                                    <input type="text" name="house_exact" placeholder="Будинок">
-                                    <input type="text" name="apartment_exact" placeholder="Квартира/Офіс">
+                                    {{order_form.house}}
+                                    {{order_form.apartment}}
                                 </div>
                                 <label class="checkbox">
-                                    <input type="checkbox" name="unknown_address_exact"> Я не знаю адресу
+                                    {{order_form.unknown_address}} Я не знаю адресу
                                 </label>
 
                                 <div class="unknown-message hidden">
@@ -109,58 +80,29 @@
                                 </div>
 
                                 <div class="row">
-                                    <input type="text" name="date_exact" placeholder="Дата">
-                                    <input type="text" name="time_exact" placeholder="Період">
+                                    {{order_form.date}}
+                                    {{order_form.time}}    
                                 </div>
                             </div>
                         </div>
 
-                        <div class="delivery-box express">
-
-                            <label class="checkbox">
-                                <input type="radio" name="delivery_method" id="express" value="express">
-                                <span>Експрес | ~30 хвилин 99 грн</span>
-                            </label>
-                            
-                            <div class="inputs">
-                                <input type="text" name="street_express" placeholder="Вулиця">
-                                <div class="row">
-                                    <input type="text" name="house_express" placeholder="Будинок">
-                                    <input type="text" name="apartment_express" placeholder="Квартира/Офіс">
-                                </div>
-                                <label class="checkbox">
-                                    <input type="checkbox" name="unknown_address_express"> Я не знаю адресу
-                                </label>
-
-                                <div class="unknown-message hidden">
-                                    <p>Не хвилюйтесь! Ми самостійно зв’яжемося з отримувачем для уточнення адреси)</p>
-                                </div>
-
-                                <div class="row">
-                                    <input type="text" name="date_express" placeholder="Дата">
-                                    <input type="text" name="time_express" placeholder="Період">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="delivery-box self-pickup">
-                            <label class="checkbox">
-                                <input type="radio" name="delivery_method" id="self-pickup" value="self-pickup">
-                                <span>Самовивіз | Безкоштовно</span>
-                            </label>
-
-                            <div class="inputs">
-                                <div class="row">
-                                    <input type="text" name="date_express" placeholder="Дата">
-                                    <input type="text" name="time_express" placeholder="Період">
-                                </div>
-                            </div>
-
-                        </div>
-                    </form>
+                    </div>
                 </div>
 
-            </section>
+                {% if cart|length >= 1 %}
+                <div class="submit-order">
+                    <button class="submit-order-btn" name='proceed-to-checkout' type='submit'>
+                            Оформити замовлення
+                    </button>
+                </div>
+                {% else %}
+                <div class="submit-order">
+                    <p>Знайдіть ідеальний букет для когось особливого</p>
+                    <a href="{% url "shop:main" %}">Перейти до каталогу...</a>
+                </div>
+                {% endif %}
+
+            </form>
 
             <section class="order-content">
                 <div class="order">
@@ -246,22 +188,6 @@
                         </a>
                     </div>
                 </div>
-
-                {% if cart|length >= 1 %}
-                <div class="submit-order">
-                    <form action="{% url "cart:cart" %}" method='POST'>
-                        {% csrf_token %}
-                        <button class="submit-order-btn" name='proceed-to-checkout' type='submit'>
-                            Оформити замовлення
-                        </button>
-                    </form>
-                </div>
-                {% else %}
-                <div class="submit-order">
-                    <p>Знайдіть ідеальний букет для когось особливого</p>
-                    <a href="{% url "shop:main" %}">Перейти до каталогу...</a>
-                </div>
-                {% endif %}
 
             </section>
 

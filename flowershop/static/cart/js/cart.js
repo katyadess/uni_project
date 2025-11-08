@@ -6,7 +6,7 @@ const recipientInputs = document.querySelectorAll(".form-box .inputs input");
 
 // --- 1. Початковий стан ---
 textarea.style.display = cardCheckbox.checked ? "block" : "none";
-
+ 
 // --- 2. Перемикання кнопок ---
 const toggleButtons = [meBtn, otherBtn];
 
@@ -31,81 +31,57 @@ cardCheckbox.addEventListener("change", () => {
 });
 
 
-// Получаем все delivery-box
-const deliveryBoxes = document.querySelectorAll('.delivery-box');
+const box = document.querySelector('.delivery-box.active');
+const deliverySelect = box.querySelector('select[name="delivery_method"]');
+const unknownCheckbox = box.querySelector('input[name="unknown_address"]');
+const unknownMessage = box.querySelector('.unknown-message');
+const streetInput = box.querySelector('input[name="street"]');
+const houseApartmentRow = box.querySelector('.inputs .row');
+const timeInput = box.querySelector('input[name="time"]');
+const checkboxRow = unknownCheckbox ? unknownCheckbox.closest('label.checkbox') : null;
 
-deliveryBoxes.forEach(box => {
-    const radio = box.querySelector('input[type="radio"]');
-    const unknownCheckbox = box.querySelector('input[type="checkbox"]');
-    const unknownMessage = box.querySelector('.unknown-message');
-    const inputs = box.querySelector('.inputs');
+const toggleFields = () => {
+    if (!deliverySelect) return;
 
-    // При выборе способа доставки
-    radio.addEventListener('change', () => {
-        deliveryBoxes.forEach(b => {
-            b.classList.remove('active');
+    const value = deliverySelect.value;
 
-            const checkbox = b.querySelector('input[type="checkbox"]');
-            const message = b.querySelector('.unknown-message');
-            const addrInputs = b.querySelector('.inputs');
-
-            if (checkbox && message && addrInputs) {
-                // Сбрасываем чекбокс "не знаю адресу"
-                checkbox.checked = false;
-                message.classList.add('hidden');
-
-                // --- Очищаем абсолютно все input внутри блока ---
-                const allInputs = addrInputs.querySelectorAll('input');
-                allInputs.forEach(input => {
-                    input.value = '';
-                    input.style.display = 'flex'; // показываем все поля
-                });
-            }
-        });
-
-        // Делаем активным выбранный блок
-        box.classList.add('active');
-    });
-
-    // Если есть чекбокс "не знаю адресу"
-    if (unknownCheckbox && unknownMessage && inputs) {
-        unknownCheckbox.addEventListener('change', () => {
-            const street = inputs.querySelector('input[name^="street"]');
-            const houseApartmentRow = inputs.querySelector('.row');
-
-            if (unknownCheckbox.checked) {
-                unknownMessage.classList.remove('hidden');
-                if (street) street.style.display = 'none';
-                if (houseApartmentRow) houseApartmentRow.style.display = 'none';
-            } else {
-                unknownMessage.classList.add('hidden');
-                if (street) street.style.display = 'flex';
-                if (houseApartmentRow) houseApartmentRow.style.display = 'flex';
-            }
-        });
+    // Показываем/скрываем поле времени
+    if (value === 'exact' || value === 'pickup') {
+        timeInput.style.display = 'flex';
+    } else {
+        timeInput.style.display = 'none';
     }
-});
 
+    // Показываем/скрываем адресные поля
+    if (value === 'pickup') {
+        if (streetInput) streetInput.style.display = 'none';
+        if (houseApartmentRow) houseApartmentRow.style.display = 'none';
+        if (checkboxRow) checkboxRow.style.display = 'none';
+        if (unknownMessage) unknownMessage.classList.add('hidden'); // скрываем сообщение на всякий случай
+    } else {
+        if (streetInput) streetInput.style.display = 'block';
+        if (houseApartmentRow) houseApartmentRow.style.display = 'flex';
+        if (checkboxRow) checkboxRow.style.display = 'flex';
+    }
+};
 
-// Получаем все элементы корзины
-const items = document.querySelectorAll('.item');
+// Слушаем изменения метода доставки
+if (deliverySelect) {
+    deliverySelect.addEventListener('change', toggleFields);
+    toggleFields(); // применяем сразу при загрузке страницы
+}
 
-items.forEach(item => {
-    const decreaseBtn = item.querySelector('.minus-btn');
-    const increaseBtn = item.querySelector('.plus-btn');
-    const quantityInput = item.querySelector('input[name="quantity"]');
-
-    // Кнопка уменьшения
-    decreaseBtn.addEventListener('click', () => {
-        let currentValue = parseInt(quantityInput.value);
-        if (currentValue > 1) { // минимальное значение = 1
-            quantityInput.value = currentValue - 1;
+// Чекбокс "Я не знаю адресу" работает только для остальных вариантов (не pickup)
+if (unknownCheckbox && unknownMessage && streetInput && houseApartmentRow) {
+    unknownCheckbox.addEventListener('change', () => {
+        if (unknownCheckbox.checked) {
+            unknownMessage.classList.remove('hidden');
+            streetInput.style.display = 'none';
+            houseApartmentRow.style.display = 'none';
+        } else {
+            unknownMessage.classList.add('hidden');
+            streetInput.style.display = 'block';
+            houseApartmentRow.style.display = 'flex';
         }
     });
-
-    // Кнопка увеличения
-    increaseBtn.addEventListener('click', () => {
-        let currentValue = parseInt(quantityInput.value);
-        quantityInput.value = currentValue + 1;
-    });
-});
+}

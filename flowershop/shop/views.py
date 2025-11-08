@@ -192,9 +192,5 @@ def shop_logout(request):
     return redirect('shop:home')
 
 def sposob_oplaty(request):
-    if not request.session.get('can_access_sposob_oplaty'):
-        return redirect('cart:cart')
-    
-    del request.session['can_access_sposob_oplaty']
     return render(request, 'shop/sposob_oplaty.html')
 
