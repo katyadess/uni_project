@@ -12,6 +12,7 @@ class Order(models.Model):
     ]
 
     payment_method = models.CharField(max_length=20, choices=PAYMENT_METHODS, default='card')
+    is_paid = models.BooleanField(default=False)
     
     DELIVERY_METHODS = [
         ('standard', 'Стандартна | (~2 години)'),
@@ -69,4 +70,4 @@ class OrderItem(models.Model):
 
     def get_cost(self):
         return self.price * self.quantity
- 
+  

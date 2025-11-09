@@ -243,6 +243,8 @@ def oplata(request, order_id):
         if 'pay' in request.POST:
             # Here you would normally process the payment details.
             # For this example, we'll assume the payment is successful.
+            order.is_paid = True
+            order.save()
             request.session['can_access_order_page'] = True
             return redirect('orders:order', order_id=order.id)
     

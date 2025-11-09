@@ -5,12 +5,23 @@ from orders.models import *
 from shop.models import *
 from django.contrib.auth.decorators import login_required
 from random import sample
+from datetime import timedelta
+from django.utils import timezone
+
+threshold = timezone.now() - timedelta(hours=1)
 # Create your views here.
 
 @login_required(login_url='shop:home')
 def cart(request):
     cart = Cart(request)
     order_form = OrderForm(request.POST or None)
+    
+    Order.objects.filter(
+        user=request.user,
+        is_paid=False,
+    ).exclude(payment_method='cash').filter(
+        created_at__lt=threshold
+    ).delete()
     
     bouquets = list(Bouquet.objects.all())
     try:
