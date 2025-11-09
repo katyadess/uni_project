@@ -62,6 +62,8 @@ body {
     outline: none;
     background: #B7DCAB99;
     color: var(--clr-text);
+    font-family: var(--ff);
+    font-weight: 600;
     font-size: 16px;
     transition: 0.3s;
 }
@@ -106,12 +108,14 @@ body {
 }
 
 .filters select {
-    padding: 15px 35px;
+    padding: 15px 25px;
     border-radius: 30px;
     border: none;
     background: #B7DCAB99;
     color: #5a7757;
     font-size: 15px;
+    font-weight: 600;
+    font-family: var(--ff);
     cursor: pointer;
     outline: none;
     transition: background 0.2s;
@@ -137,7 +141,7 @@ body {
     text-align: center;
 }
 
-.card img {
+.card img { 
     width: 250px;
     height: auto;
     border-radius: 15px;
