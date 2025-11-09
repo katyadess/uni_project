@@ -7,12 +7,10 @@ from django.contrib.auth.decorators import login_required
 @login_required(login_url='shop:home')
 def order(request, order_id):
     
-    if not request.session.get('can_access_order_page'):
-        return redirect('shop:oplata', order_id=order_id)
-    
-    del request.session['can_access_order_page']
-    
-    order = get_object_or_404(Order, id=order_id)
+    order = get_object_or_404(Order, id=order_id, user=request.user, is_active=True)
+    order.status = 'paid'
+    order.is_active = False
+    order.save()
     return render(request, 'orders/zamovlenya_usp.html', {
         'order': order,
     })

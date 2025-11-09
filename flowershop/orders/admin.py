@@ -12,13 +12,13 @@ class OrderAdmin(admin.ModelAdmin):
     list_display = (
         'id', 
         'user', 
-        'user_name', 
         'delivery_method', 
         'payment_method', 
         'date', 
         'time', 
         'created_at',
         'total_cost',
+        'is_paid',
         )
     list_filter = ('delivery_method', 'payment_method', 'created_at')
     search_fields = ('user_name', 'user_tel', 'recipient_name', 'recipient_phone')

@@ -8,13 +8,20 @@ from random import sample
 from datetime import timedelta
 from django.utils import timezone
 
-threshold = timezone.now() - timedelta(hours=1)
 # Create your views here.
 
 @login_required(login_url='shop:home')
 def cart(request):
     cart = Cart(request)
     order_form = OrderForm(request.POST or None)
+    
+    threshold = timezone.now() - timedelta(minutes=10)
+    
+    Order.objects.filter(
+        user=request.user, 
+        is_active=True, 
+        status='cart',
+    ).update(is_active=False)
     
     Order.objects.filter(
         user=request.user,
@@ -65,6 +72,8 @@ def cart(request):
                 order = order_form.save(commit=False)
                 order.user = request.user
             
+                order.status = 'cart'
+                order.is_active = True
                 order.delivery_method = request.POST.get('delivery_method', 'standard')
                 order.time = request.POST.get('time') or None
                 order.date = request.POST.get('date')
@@ -91,7 +100,6 @@ def cart(request):
                     )
                 cart.clear() 
             
-            request.session['can_access_sposob_oplaty'] = True
             return redirect('shop:sposob_oplaty', order_id=order.id)
             
         elif 'add-to-cart' in request.POST:

@@ -4,14 +4,23 @@ from shop.models import *
 
 class Order(models.Model):
     
+    is_active = models.BooleanField(default=True)
+    
     PAYMENT_METHODS = [
         ('card', 'Оплата карткою'),
         ('cash', 'Наложений платіж'),
         ('applepay', 'Apple Pay'),
         ('googlepay', 'Google Pay'),
     ]
+    
+    STATUS_CHOICES = [
+        ('cart', 'В корзине'),
+        ('payment_method', 'Выбрал способ оплаты'),
+        ('paid', 'Оплачен'),
+    ]
+    status = models.CharField(max_length=30, choices=STATUS_CHOICES, default='cart')
 
-    payment_method = models.CharField(max_length=20, choices=PAYMENT_METHODS, default='card')
+    payment_method = models.CharField(max_length=20, choices=PAYMENT_METHODS)
     is_paid = models.BooleanField(default=False)
     
     DELIVERY_METHODS = [

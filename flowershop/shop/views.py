@@ -200,15 +200,10 @@ def pro_tovar(request, id):
 
 
 def sposob_oplaty(request, order_id):
-    
-    
-    
-    if not request.session.get('can_access_sposob_oplaty'):
-        return redirect('cart:cart')  
-    
-    del request.session['can_access_sposob_oplaty']
 
-    last_order = get_object_or_404(Order, id=order_id)
+    last_order = get_object_or_404(Order, id=order_id, user=request.user, is_active=True)
+    if last_order.status != 'cart':
+        return redirect('cart:cart')
 
     if request.method == "POST":
         
@@ -216,13 +211,12 @@ def sposob_oplaty(request, order_id):
             payment_method = request.POST.get("payment_method")
             if payment_method:
                 last_order.payment_method = payment_method
+                last_order.status = 'payment_method'
                 last_order.save()
                 
                 if payment_method == "cash":
-                    request.session['can_access_order_page'] = True
                     return redirect('orders:order', order_id=last_order.id)
                 else:
-                    request.session['can_access_oplata_page'] = True
                     return redirect('shop:oplata', order_id=last_order.id)
 
     return render(request, 'shop/sposob_oplaty.html', {
@@ -232,20 +226,16 @@ def sposob_oplaty(request, order_id):
 
 def oplata(request, order_id):
     
-    if not request.session.get('can_access_oplata_page'):
-        return redirect('shop:sposob_oplaty', order_id=order_id)
-    
-    del request.session['can_access_oplata_page']
-    
-    order = get_object_or_404(Order, id=order_id)
+    order = get_object_or_404(Order, id=order_id, user=request.user, is_active=True)
+    if order.status != 'payment_method':
+        return redirect('shop:sposob_oplaty', order.id)
     
     if request.method == "POST":
         if 'pay' in request.POST:
-            # Here you would normally process the payment details.
-            # For this example, we'll assume the payment is successful.
             order.is_paid = True
+            order.status = 'paid'
+            order.is_active = False
             order.save()
-            request.session['can_access_order_page'] = True
             return redirect('orders:order', order_id=order.id)
     
     return render(request, 'shop/oplata.html', {
