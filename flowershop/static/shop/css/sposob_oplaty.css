@@ -1,8 +1,123 @@
+:root {
+    --fs-logo: 52px;
+    --fs-nav-info: 22px;
+    --fs-nav-icons: 52px;
+    --fs-footer-list: 30px;
+    --fs-item-name: 16px;
+    --ff: 'Montserrat Alternates', sans-serif;
+    --tc: #4CAF50;
+    --bc: #e7e4e4;
+    --brad: 19px;
+}
+
+.order-details {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    min-height: calc(100vh - 160px); 
+    flex-direction: column;
+    gap: 50px;
+    font-weight: 600;
+}
+
+.order-content-items {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    background-color: var(--bc);
+    border-radius: var(--brad);
+    padding: 25px;
+    width: 550px;
+    display: flex;
+    flex-direction: column;
+}
+
+.order-content-items .items {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.order-content-items .items .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item .item-details {
+    display: flex;
+    gap: 20px;}
+
+
+.item .item-image {
+    width: auto;
+    height: 171px;
+    border-radius: var(--brad);
+}
+
+
+.details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.flower-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.flower-details .item-name {
+    font-size: var(--fs-item-name);
+    font-weight: 600;
+    font-family: var(--ff);
+}
+
+.flower-price .price {
+    font-size: var(--fs-item-name);
+    font-family: var(--ff);
+    font-weight: 600;
+    color: var(--tc);
+}
+
+.delivery-method span, .card-info .value {
+    color: var(--tc);
+}
+
+.address-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.datetime {
+    display: flex;
+    flex-direction: column;
+}
+
+.address-info .address span, .address-info .datetime p span {
+    color: var(--tc);
+}
+
+.order-content-items .total {
+    font-size: 22px;
+}
+
+.order-content-items .total .price {
+    color: var(--tc);
+    font-weight: 700;
+}
+
+.payment-title {
+    margin-bottom: 40px;
+}
+
 .payment-section {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 80px 20px;
+    padding: 30px 20px;
     min-height: calc(100vh - 160px); 
     flex-direction: column;
     gap: 50px;
@@ -18,7 +133,6 @@
     font-size: 30px;
     font-weight: medium;
     color: #000;
-    margin-bottom: 79px;
 }
 
 .payment-form {
@@ -80,15 +194,18 @@
 }
 
 .continue-btn {
+    width: 60%;
+    margin-top: 20px;
     display: inline-block;
     padding: 12px 30px;
+    font-family: var(--ff);
     background-color: #F58EB1;
     color: white;
     font-weight: 600;
     font-size: 16px;
-    text-decoration: none; 
     border-radius: 10px;
     text-align: center;
+    align-self: center;
     transition: background-color 0.3s ease;
 }
 

@@ -4,6 +4,15 @@ from shop.models import *
 
 class Order(models.Model):
     
+    PAYMENT_METHODS = [
+        ('card', 'Оплата карткою'),
+        ('cash', 'Наложений платіж'),
+        ('applepay', 'Apple Pay'),
+        ('googlepay', 'Google Pay'),
+    ]
+
+    payment_method = models.CharField(max_length=20, choices=PAYMENT_METHODS, default='card')
+    
     DELIVERY_METHODS = [
         ('standard', 'Стандартна | (~2 години)'),
         ('exact', 'В точний час | (+99 грн)'),
@@ -11,7 +20,8 @@ class Order(models.Model):
         ('pickup', 'Самовивіз | (безкоштовно)'),
     ]
 
-
+    delivery_method = models.CharField(max_length=20, choices=DELIVERY_METHODS, default='standard')
+    
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
     user_name = models.CharField(max_length=100)
     user_tel = models.CharField(max_length=20)
@@ -21,8 +31,6 @@ class Order(models.Model):
 
     add_card = models.BooleanField(default=False)
     card_message = models.TextField(blank=True, null=True)
-
-    delivery_method = models.CharField(max_length=20, choices=DELIVERY_METHODS, default='standard')
     
     street = models.CharField(max_length=255, blank=True, null=True)
     house = models.CharField(max_length=50, blank=True, null=True)

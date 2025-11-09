@@ -121,6 +121,11 @@ body {
     z-index: 1;
 }
 
+.return-button a {
+    color: #fff;
+    text-decoration: none;
+}
+
 .return-button::before {
     content: '';
     position: absolute;

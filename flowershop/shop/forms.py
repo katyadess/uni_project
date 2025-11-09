@@ -39,7 +39,7 @@ class EditProfileForm(forms.ModelForm):
         'name': 'email',
     }), 
     required=True
-    )
+    ) 
     
     first_name = forms.CharField(
         widget=forms.TextInput(attrs={

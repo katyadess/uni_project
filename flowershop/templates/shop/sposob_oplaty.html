@@ -4,11 +4,82 @@
 <link rel="stylesheet" href="{% static "shop/css/sposob_oplaty.css" %}">
 {% endblock css_links %}
 
-{% block content %}
+{% block content %} 
+
+    <div class="order-details">
+        <h1 class="order-title">Замовлення №{{last_order.id}}</h1>
+        <div class="order-content-items">
+            <div class="items">
+                {% for item in last_order.items.all %}
+                    <div class="item">
+                        <div class="item-details">
+                            <div class="img">
+                                <img src="{{ item.bouquet.image.url }}" alt="{{ item.bouquet.name }}" class="item-image">
+                            </div>
+                            <div class="details">
+                                <div class="flower-details">
+                                    <p class="item-name">Букет {{item.bouquet.name }}</p>
+                                    <p class="item-quantity">Кількість: {{item.quantity}}</p>
+                                </div>
+                                <div class="flower-price">
+                                    <span class="price">{{item.get_cost|floatformat:0}} грн</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="delivery-method">
+                
+                {% if last_order.delivery_method == 'standard' %}
+                    <p>Доставка: стандартна (~2 години) - <span>безкоштовно</span></p>
+                {% elif last_order.delivery_method == 'exact' %}
+                    <p>Доставка: в точний час <span>+99 грн</span></p>
+                {% elif last_order.delivery_method == 'express' %}
+                    <p>Доставка: експрес (~30 хвилин) <span>+99 грн</span></p>
+                {% else %}
+                    <p>Самовивіз - <span>безкоштовно</span></p>
+                    <p>Aдреса: м. Дніпро, вул. Центральна, 15 (магазин "єКвіти")</p>
+                {% endif %}
+                
+            </div>
+
+            {% if last_order.add_card %}
+                <div class="card-info">
+                    <span>Листівка:</span>
+                    <span class="value">+29 грн</span>
+                </div>
+            {% endif %}
+
+            <div class="address-info">
+                <div class="address">Адреса доставки:
+                    {% if last_order.unknown_address %}
+                        <span>адреса буде уточнена пізніше</span>
+                    {% else %}
+                        <span>{{ last_order.street }}, буд. {% if last_order.street %}{{ last_order.house }} {% endif %} {% if last_order.apartment %}, кв. {{ last_order.apartment }} {% endif %}</span>
+                    {% endif %}
+                </div>   
+                <div class="datetime">
+                    <p>Дата: <span>{{ last_order.date }}</span></p>
+                    {% if last_order.time %}
+                    <p>Час: <span>{{ last_order.time }}</span></p>
+                    {% endif %}
+                </div> 
+            </div>
+
+            <div class="total">
+                <span>Загальна вартість:</span>
+                <span class="price">{{ last_order.get_total_cost|floatformat:0 }} грн</span>
+            </div>
+        </div>
+    </div>
+    
     <main class="payment-section">
         <div class="payment-container">
-            <h1 class="order-title">Замовлення №35467</h1>
-            <form class="payment-form">
+            <h1 class="payment-title">Способи оплати</h1>
+            <form class="payment-form" method="post" action="{% url 'shop:sposob_oplaty' last_order.id %}">
+                {% csrf_token %}
                 <div class="payment-option">
                     <input type="radio" id="card" name="payment_method" value="card" checked>
                     <label for="card">Оплата карткою (Visa/MasterCard)</label>
@@ -25,16 +96,13 @@
                     <input type="radio" id="googlepay" name="payment_method" value="googlepay">
                     <label for="googlepay">Google pay</label>
                 </div>
+                <button class="continue-btn" type="submit" name="continue">
+                    Продовжити
+                </button>
             </form>
         </div>
-        <a id="continueBtn" 
-            data-cash-url="{% url 'orders:order' %}"
-            data-card-url="{% url 'shop:oplata' %}"
-            class="continue-btn">Продовжити
-        </a>
     </main>
 {% endblock content %}
         
 {% block scripts %}
-    <script src="{% static "shop/js/sposob_oplaty.js" %}"></script>
 {% endblock scripts %}

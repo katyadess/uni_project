@@ -4,11 +4,22 @@ from django.contrib.auth import authenticate, login, logout, update_session_auth
 from .forms import *
 from .models import *
 from cart.cart import Cart
+from orders.models import *
 from django.core.paginator import Paginator
 from django.db.models import Q, F, Value, DecimalField
 from django.db.models.functions import Coalesce
 from django.db.models.functions import Lower
 
+
+# изменения не нужны
+def about_us(request):
+    return render(request, 'shop/ProNas_info.html')
+def delivery(request):
+    return render(request, 'shop/dostavka_info.html')
+def payment(request):
+    return render(request, 'shop/oplata_info.html')
+
+# login
 def home(request):
     form = LoginForm(request.POST or None)
      
@@ -30,6 +41,7 @@ def home(request):
         'latest_reviews': latest_reviews,
     })
 
+
 def registration(request):
     form = RegistrationForm(request.POST or None)
     if request.method == "POST" and form.is_valid():
@@ -45,6 +57,12 @@ def registration(request):
         'form': form,
         'latest_reviews': latest_reviews,
     })
+
+# logout
+def shop_logout(request):
+    logout(request)
+    return redirect('shop:home')
+
 
 @login_required(login_url='shop:home')
 def profile(request):
@@ -78,6 +96,7 @@ def profile(request):
         'edit_phone_form': edit_phone_form,
     })
     
+    
 @login_required(login_url='shop:home')
 def change_password(request):
     if request.method == 'POST':
@@ -95,6 +114,7 @@ def change_password(request):
         form = ChangePasswordForm()
         
     return render(request, 'shop/change_password.html', {'form': form})
+
 
 
 def main(request):
@@ -136,13 +156,6 @@ def main(request):
     }
     return render(request, 'shop/main.html', context)
 
-# изменения не нужны
-def about_us(request):
-    return render(request, 'shop/ProNas_info.html')
-def delivery(request):
-    return render(request, 'shop/dostavka_info.html')
-def payment(request):
-    return render(request, 'shop/oplata_info.html')
 
 
 def pro_tovar(request, id):
@@ -184,13 +197,55 @@ def pro_tovar(request, id):
     
     return render(request, 'shop/pro_tovar.html', context)
 
-def oplata(request):
-    return render(request, 'shop/oplata.html')
 
-def shop_logout(request):
-    logout(request)
-    return redirect('shop:home')
 
-def sposob_oplaty(request):
-    return render(request, 'shop/sposob_oplaty.html')
+def sposob_oplaty(request, order_id):
+    
+    
+    
+    if not request.session.get('can_access_sposob_oplaty'):
+        return redirect('cart:cart')  
+    
+    del request.session['can_access_sposob_oplaty']
 
+    last_order = get_object_or_404(Order, id=order_id)
+
+    if request.method == "POST":
+        
+        if 'continue' in request.POST:
+            payment_method = request.POST.get("payment_method")
+            if payment_method:
+                last_order.payment_method = payment_method
+                last_order.save()
+                
+                if payment_method == "cash":
+                    request.session['can_access_order_page'] = True
+                    return redirect('orders:order', order_id=last_order.id)
+                else:
+                    request.session['can_access_oplata_page'] = True
+                    return redirect('shop:oplata', order_id=last_order.id)
+
+    return render(request, 'shop/sposob_oplaty.html', {
+        'last_order': last_order,
+    })
+
+
+def oplata(request, order_id):
+    
+    if not request.session.get('can_access_oplata_page'):
+        return redirect('shop:sposob_oplaty', order_id=order_id)
+    
+    del request.session['can_access_oplata_page']
+    
+    order = get_object_or_404(Order, id=order_id)
+    
+    if request.method == "POST":
+        if 'pay' in request.POST:
+            # Here you would normally process the payment details.
+            # For this example, we'll assume the payment is successful.
+            request.session['can_access_order_page'] = True
+            return redirect('orders:order', order_id=order.id)
+    
+    return render(request, 'shop/oplata.html', {
+        'order': order,
+    })

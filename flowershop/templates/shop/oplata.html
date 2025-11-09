@@ -6,26 +6,39 @@
 
 {% block content %}
     <main class="payment-main-container">
-        <h1 class="order-title">Замовлення №35467</h1>
+        <h1 class="order-title">Замовлення №{{order.id}}</h1>
 
-        <div class="payment-widget">
+        <form class="payment-widget" method="post" action="{% url 'shop:oplata' order.id %}">
+            {% csrf_token %}
             
-            <input class="card-number" type="text" placeholder="Номер картки">
+            <input class="card-number" type="text" placeholder="Номер картки"
+                maxlength="19" inputmode="numeric" autocomplete="cc-number"
+                id="card-number" required
+            >
             
             <p class="total-due">
-                До сплати: <span>****</span>
+                До сплати: <span>{{order.get_total_cost|floatformat:0}} грн</span>
             </p>
 
-            <input class="expiry-date" type="text" placeholder="MM/DD">
-            <input class="cvv" type="text" placeholder="CVV">
+            <input class="expiry-date" type="text" placeholder="MM/YY"
+            inputmode="numeric" maxlength="5" id="card-expiry" autocomplete="cc-exp"
+            required
+            >
+            <input class="cvv" type="text" placeholder="CVV" inputmode="numeric"
+            maxlength="3" id="card-cvv" autocomplete="cc-csc"
+            required
+            >
             
-            <input class="card-holder" type="text" placeholder="Ім'я власника">
+            <input class="card-holder" type="text" placeholder="Ім'я власника"
+            id="card-holder" autocomplete="cc-name" required
+            >
 
-            <a href="{% url "orders:order" %}" class="pay-button">СПЛАТИТИ</a>
-        </div>
+            <button type='submit' class="pay-button" name='pay'>СПЛАТИТИ</button>
+        </form> 
     </main>
-
+ 
 {% endblock content %}
 
 {% block scripts %}
+<script src="{% static "shop/js/oplata.js" %}"></script>
 {% endblock scripts %} 

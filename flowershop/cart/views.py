@@ -48,6 +48,7 @@ def cart(request):
             
         elif 'proceed-to-checkout' in request.POST:
             
+            order_form = OrderForm(request.POST)
             if order_form.is_valid():
                     
                 order = order_form.save(commit=False)
@@ -79,7 +80,8 @@ def cart(request):
                     )
                 cart.clear() 
             
-            return redirect('shop:sposob_oplaty')
+            request.session['can_access_sposob_oplaty'] = True
+            return redirect('shop:sposob_oplaty', order_id=order.id)
             
         elif 'add-to-cart' in request.POST:
             bouquet_id = request.POST.get('bouquet_id') 
