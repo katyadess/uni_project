@@ -37,6 +37,7 @@ const unknownCheckbox = box.querySelector('input[name="unknown_address"]');
 const unknownMessage = box.querySelector('.unknown-message');
 const streetInput = box.querySelector('input[name="street"]');
 const houseApartmentRow = box.querySelector('.inputs .row');
+const pickupBlock = document.querySelector('.pickup-address');
 const timeInput = box.querySelector('input[name="time"]');
 const checkboxRow = unknownCheckbox ? unknownCheckbox.closest('label.checkbox') : null;
 
@@ -58,10 +59,12 @@ const toggleFields = () => {
         if (houseApartmentRow) houseApartmentRow.style.display = 'none';
         if (checkboxRow) checkboxRow.style.display = 'none';
         if (unknownMessage) unknownMessage.classList.add('hidden'); // скрываем сообщение на всякий случай
+        pickupBlock.classList.remove('hidden');
     } else {
         if (streetInput) streetInput.style.display = 'block';
         if (houseApartmentRow) houseApartmentRow.style.display = 'flex';
         if (checkboxRow) checkboxRow.style.display = 'flex';
+        pickupBlock.classList.add('hidden');
     }
 };
 
