@@ -49,10 +49,19 @@
                     <div class="tabs-container">
                         <div class="tabs-nav">
                             <button class="tab-link active" data-tab="description">Опис</button>
+                            <button class="tab-link" data-tab="delivery">Доставка</button>
                         </div>
                         <div class="tabs-content">
                             <div id="description" class="tab-pane active">
                                 <p>{{bouquet.description}}</p>
+                            </div>
+                            <div id="delivery" class="tab-pane">
+                                <ul>
+                                    <li>Cтандартна (~2 години) — <strong>безкоштовно</strong></li>    
+                                    <li>Експрес (через 30 хвилин) — <strong>99 грн</strong></li>   
+                                    <li>В точний час — <strong>99 грн</strong></li>
+                                    <li>Самовивіз — <strong>безкоштовно</strong></li>
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -107,4 +116,5 @@
 {% endblock content %}
 
 {% block scripts %}
+<script src="{% static "shop/js/pro_tovar.js" %}"></script>
 {% endblock scripts %} 
