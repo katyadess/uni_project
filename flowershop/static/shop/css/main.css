@@ -18,7 +18,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: #fcccd6;
+    background-color: #F8C1CD;
     color: #7a8a67;
     overflow-x: hidden;
 }
@@ -119,11 +119,27 @@ body {
     cursor: pointer;
     outline: none;
     transition: background 0.2s;
+    -webkit-appearance: none; /* Chrome, Safari, Edge */
+    -moz-appearance: none;    /* Firefox */
+    appearance: none;         /* стандарт */
+    padding-right: 30px;      /* чтобы текст не налезал на кастомную стрелку */
 }
 
-.filters select:hover {
-    background: #B7DCABcc;
+.select-wrapper {
+    position: relative;
 }
+
+.select-wrapper::after {
+    content: "▼";
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    font-size: 16px;
+    color:#7EB877;
+}
+
 
 
 .products {

@@ -1,3 +1,8 @@
+body {
+    background: radial-gradient(circle, #CAD4B5 10%, #CAD4B5 80%, #ffd6df 100%);
+}
+
+
 .order-title {
     font-size: 30px;
     font-weight: medium;
@@ -10,7 +15,7 @@
     width: 100%;
     max-width: 800px; 
     margin: 30px auto; 
-    padding: 0 15px;
+    padding: 0 15px; 
     flex-grow: 1; 
     font-family: 'Montserrat Alternates', sans-serif;
 }

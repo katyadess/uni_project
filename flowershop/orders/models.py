@@ -47,7 +47,7 @@ class Order(models.Model):
     apartment = models.CharField(max_length=50, blank=True, null=True)
     unknown_address = models.BooleanField(default=False)
 
-    date = models.DateField(max_length=50, blank=True, null=True)
+    date = models.DateField(max_length=50)
     time = models.TimeField(max_length=50, blank=True, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)

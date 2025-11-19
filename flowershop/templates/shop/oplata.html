@@ -4,7 +4,11 @@
 <link rel="stylesheet" href="{% static "shop/css/oplata.css" %}">
 {% endblock css_links %}
 
-{% block content %}
+{% block logo_img %}
+<img src="{% static "shop/images/pinkVector.png" %}" alt="і" class="icon">ти
+{% endblock logo_img %}
+
+{% block content %} 
     <main class="payment-main-container">
         <h1 class="order-title">Замовлення №{{order.id}}</h1>
 

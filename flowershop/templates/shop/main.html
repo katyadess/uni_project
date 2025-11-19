@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="{% static "shop/css/main.css" %}">
 {% endblock css_links %}
  
-{% block content %}
+{% block content %} 
     <main class="content">
         <form method="get" action="{% url "shop:main" %}" class="search-bar">
             <input type="text" name="q" placeholder="Пошук..." value="{{ request.GET.q|default:'' }}">
@@ -19,20 +19,25 @@
             <form method="get" action="{% url "shop:main" %}" class="filters">
     
                 <input type="hidden" name="q" value="{{ request.GET.q|default:'' }}">
-                <select name="flower_type">
-                    <option value="">Квіти</option>
-                    {% for flower in flower_types %}
-                        <option value="{{ flower.name }}" {% if request.GET.flower_type == flower.name %}selected{% endif %}>
-                            {{ flower.name }}
-                        </option>
-                    {% endfor %}
-                </select>
+
+                <div class="select-wrapper">
+                    <select name="flower_type">
+                        <option value="">Квіти</option>
+                        {% for flower in flower_types %}
+                            <option value="{{ flower.name }}" {% if request.GET.flower_type == flower.name %}selected{% endif %}>
+                                {{ flower.name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
     
-                <select name="price_order">
-                    <option value="">Ціна</option>
-                    <option value="asc" {% if request.GET.price_order == 'asc' %}selected{% endif %}>Від дешевших до дорожчих</option>
-                    <option value="desc" {% if request.GET.price_order == 'desc' %}selected{% endif %}>Від дорожчих до дешевших</option>
-                </select>
+                <div class="select-wrapper">
+                    <select name="price_order">
+                        <option value="">Ціна</option>
+                        <option value="asc" {% if request.GET.price_order == 'asc' %}selected{% endif %}>Від дешевших до дорожчих</option>
+                        <option value="desc" {% if request.GET.price_order == 'desc' %}selected{% endif %}>Від дорожчих до дешевших</option>
+                    </select>
+                </div>
     
                 <button type="submit" style="display:none;"></button>
                 

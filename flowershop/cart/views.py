@@ -52,6 +52,7 @@ def cart(request):
             bouquet = Bouquet.objects.get(id=bouquet_id)
             
             cart.add(bouquet)
+            return redirect('cart:cart')
             
         elif 'decrease' in request.POST:
             bouquet_id = request.POST.get('bouquet_id') 
@@ -62,6 +63,7 @@ def cart(request):
                 cart.add(bouquet, -1, update_quantity=False)
             else:
                 cart.remove(bouquet)
+            return redirect('cart:cart')
            
             
         elif 'proceed-to-checkout' in request.POST:
@@ -100,7 +102,7 @@ def cart(request):
                     )
                 cart.clear() 
             
-            return redirect('shop:sposob_oplaty', order_id=order.id)
+                return redirect('shop:sposob_oplaty', order_id=order.id)
             
         elif 'add-to-cart' in request.POST:
             bouquet_id = request.POST.get('bouquet_id') 
@@ -108,10 +110,8 @@ def cart(request):
             cart.add(bouquet)
             return redirect('cart:cart')
     
-        return redirect('cart:cart')
-    
     return render(request, 'cart/cart.html', {
         'cart': cart,
         'suggested': suggested,
         'order_form': order_form,
-    }) 
+    })

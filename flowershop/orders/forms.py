@@ -30,3 +30,20 @@ class OrderForm(forms.ModelForm):
             'date': forms.DateInput(attrs={'placeholder': "Дата", 'type': 'date'}),
             'time': forms.TimeInput(attrs={'placeholder': "Період",  'type': 'time'}),
         }
+    
+    def clean(self):
+        cleaned_data = super().clean()
+        unknown_address = cleaned_data.get('unknown_address')
+        street = cleaned_data.get('street')
+        house = cleaned_data.get('house')
+        apartment = cleaned_data.get('apartment')
+        delivery_method = cleaned_data.get('delivery_method')
+        if not unknown_address and delivery_method != 'pickup':
+            if not street or street.strip() == "":
+                self.add_error('street', "Поле вулиця обов'язкове")
+
+            if (not house or house.strip() == "") and (not apartment or apartment.strip() == ""):
+                self.add_error('house', "Заповніть хоча б поле будинок або квартира/офіс")
+                self.add_error('apartment', "Заповніть хоча б поле будинок або квартира/офіс")
+
+        return cleaned_data

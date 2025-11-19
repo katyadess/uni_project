@@ -2,7 +2,7 @@
     --fs-logo: 52px;
     --fs-nav-info: 22px;
     --fs-nav-icons: 52px;
-    --fs-footer-list: 30px;
+    --fs-footer-list: 25px;
     --fs-item-name: 16px;
     --ff: 'Montserrat Alternates', sans-serif;
     --tc: #4CAF50;
@@ -10,6 +10,11 @@
     --brad: 19px;
 }
 
+body {
+    background: radial-gradient(circle, #CAD4B5 10%, #CAD4B5 80%, #ffd6df 100%);
+    
+}
+ 
 .main {
     padding: 50px 130px;
 }

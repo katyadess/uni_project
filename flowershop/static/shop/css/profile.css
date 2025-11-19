@@ -1,3 +1,51 @@
+body {
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
+    background-color: #F8C1CD;
+}
+
+.footer{
+    background-color: #B7DCAB;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: 0 -20px 25px #B7DCAB;
+    position: relative; 
+    z-index: 1;
+    transform: translateZ(0);
+}
+ 
+.nav-container .logo a, .logo .icon {
+    color: #B7DCAB;
+    text-shadow:
+        -1px -1px 0 #7EB877,  
+         1px -1px 0 #7EB877,
+        -1px  1px 0 #7EB877,
+         1px  1px 0 #7EB877,
+         2px 4px 5px rgba(0, 0, 0, .3);
+}
+
+.info .nav-link {
+    color: #B7DCAB;
+    text-shadow:
+        -1px -1px 0 #7EB877,  
+         1px -1px 0 #7EB877,
+        -1px  1px 0 #7EB877,
+         1px  1px 0 #7EB877,
+         2px 4px 5px rgba(0, 0, 0, .3);
+}
+
+.icons .nav-link {
+    color: #B7DCAB;
+    text-shadow:
+        -1px -1px 0 #7EB877,  
+         1px -1px 0 #7EB877,
+        -1px  1px 0 #7EB877,
+         1px  1px 0 #7EB877,
+         2px 4px 5px rgba(0, 0, 0, .3);
+}
+
+
+
 .inform{
     box-sizing: border-box;
     display: flex;

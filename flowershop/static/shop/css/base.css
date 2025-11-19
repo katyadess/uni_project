@@ -2,7 +2,7 @@
     --fs-logo: 52px;
     --fs-nav-info: 22px;
     --fs-nav-icons: 52px;
-    --fs-footer-list: 30px;
+    --fs-footer-list: 25px;
     --ff: 'Montserrat Alternates', sans-serif;
 }
 
@@ -13,7 +13,6 @@ body::-webkit-scrollbar {
 body {
     -ms-overflow-style: none;  
     scrollbar-width: none;  
-    background: radial-gradient(circle, #CAD4B5 10%, #CAD4B5 80%, #ffd6df 100%);
     height: 100vh;
     width: 100%;
     font-family: var(--ff);
@@ -33,11 +32,12 @@ body {
     
 }
 
-.header, .footer {
+.header {
     padding: 25px 45px;
     display: flex;
     justify-content: space-between;
 }
+
 
 .footer {
     position: relative; 
@@ -60,7 +60,7 @@ body {
     display: flex;
     justify-content: space-between;
 
-}
+} 
 
 .nav-container .logo a, .logo .icon {
     display: flex;
@@ -149,6 +149,12 @@ body {
     color: #fff;
 }
 
+.footer {
+    padding: 60px 90px;
+    display: flex;
+    justify-content: space-between;
+}
+
 
 .footer .footer-sec .footer-list, .footer .footer-sec .footer-list a {
     font-size: var(--fs-footer-list);
@@ -161,4 +167,14 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    min-width: 230px;
 }
+
+.socials {
+    margin-right: 20px;
+}
+
+.main-page {
+    align-items: flex-start !important;
+}
+

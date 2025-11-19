@@ -10,6 +10,10 @@
     --brad: 19px;
 }
 
+body {
+    background: radial-gradient(circle, #CAD4B5 10%, #CAD4B5 80%, #ffd6df 100%);   
+}
+
 .order-details {
     display: flex;
     justify-content: center;

@@ -9,6 +9,10 @@ body {
     overflow-x: hidden;
 }
 
+body::-webkit-scrollbar {
+    display: none;
+} 
+
 .container {
     display: flex;
     width: 100vw;
@@ -131,7 +135,6 @@ body {
 }
 
 .socials {
-    margin-top: 30px;
     display: flex;
     gap: 20px;
 }
@@ -211,6 +214,10 @@ body {
     outline: none;
     margin-left: 50px;
     margin-bottom: 2px;
+}
+
+.error-message {
+    margin-right: 32px;
 }
 
 button.login-btn {
@@ -584,11 +591,15 @@ button.register-btn {
     align-items: flex-start;
     padding: 60px 20px;
     color: white;
+    z-index: 10;
 }
 
 .footer .footer-sec {
+    
+    z-index: 10;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 10px;
     min-width: 180px;
     justify-content: flex-start;
@@ -596,6 +607,8 @@ button.register-btn {
 
 .footer .footer-sec p,
 .footer .footer-sec li a {
+    font-family: 'Montserrat Alternates', sans-serif;
+    
     margin: 0;
     font-size: 18px;
     color: white;

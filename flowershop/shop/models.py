@@ -53,6 +53,4 @@ class UserData(models.Model):
         verbose_name_plural = 'UserData'
         
     def __str__(self) -> str:
-        return self.user.email 
-    
-
+        return self.user.email

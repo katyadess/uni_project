@@ -4,8 +4,12 @@
 <link rel="stylesheet" href="{% static "shop/css/sposob_oplaty.css" %}">
 {% endblock css_links %}
 
-{% block content %} 
+{% block logo_img %}
+<img src="{% static "shop/images/pinkVector.png" %}" alt="і" class="icon">ти
+{% endblock logo_img %}
 
+{% block content %} 
+ 
     <div class="order-details">
         <h1 class="order-title">Замовлення №{{last_order.id}}</h1>
         <div class="order-content-items">

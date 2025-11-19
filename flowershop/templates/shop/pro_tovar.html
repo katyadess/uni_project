@@ -4,6 +4,10 @@
 <link rel="stylesheet" href="{% static "shop/css/pro_tovar.css" %}">
 {% endblock css_links %}
 
+{% block logo_img %}
+<img src="{% static "shop/images/pinkVector.png" %}" alt="і" class="icon">ти
+{% endblock logo_img %}
+
 {% block content %}
     <main class="product-page-container">
         <a href="{% url "shop:main" %}" class="nav-link" id="back-arrow-button">

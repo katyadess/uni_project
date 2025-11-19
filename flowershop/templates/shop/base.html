@@ -12,14 +12,16 @@
     {% endblock css_links %}
     <title>Document</title>
 </head>
-<body>
+<body> 
     <header class="header">
 
         <div class="nav-container">
 
             <div class="logo">
                 <a href="{% url "shop:main" %}">єКв
+                    {% block logo_img %}
                     <img src="{% static "shop/images/Vector.png" %}" alt="і" class="icon">ти
+                    {% endblock logo_img %}
                 </a>
             </div>
     
@@ -73,7 +75,7 @@
     <footer class="footer">
         
         <div class="footer-sec main-page">
-            <li class="footer-list"><a href="{% url "shop:main" %}">Головна</a></li>
+            <li class="footer-list"><a href="{% url "shop:main" %}">На головну</a></li>
         </div>
 
         <div class="footer-sec socials">
